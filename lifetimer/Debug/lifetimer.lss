@@ -1,0 +1,970 @@
+
+lifetimer.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000058c  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000001  00800100  00800100  00000600  2**0
+                  ALLOC
+  2 .comment      00000030  00000000  00000000  00000600  2**0
+                  CONTENTS, READONLY
+  3 .debug_aranges 000000c0  00000000  00000000  00000630  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   00000f74  00000000  00000000  000006f0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 000001dc  00000000  00000000  00001664  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   00000368  00000000  00000000  00001840  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  000001c4  00000000  00000000  00001ba8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    0000026d  00000000  00000000  00001d6c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    00000265  00000000  00000000  00001fd9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 000000b0  00000000  00000000  0000223e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 d5 01 	jmp	0x3aa	; 0x3aa <__vector_5>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 64 02 	jmp	0x4c8	; 0x4c8 <__vector_9>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	a1 30       	cpi	r26, 0x01	; 1
+  80:	b2 07       	cpc	r27, r18
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 75 02 	call	0x4ea	; 0x4ea <main>
+  88:	0c 94 c4 02 	jmp	0x588	; 0x588 <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <SPIMasterInit>:
+};
+//SPI init
+void SPIMasterInit(void)
+{
+	//set MOSI, SCK and SS as output
+	DDRB |= (1<<PB3)|(1<<PB5)|(1<<PB2);
+  90:	84 b1       	in	r24, 0x04	; 4
+  92:	8c 62       	ori	r24, 0x2C	; 44
+  94:	84 b9       	out	0x04, r24	; 4
+	//set SS to high
+	PORTB |= (1<<PB2);
+  96:	2a 9a       	sbi	0x05, 2	; 5
+	//enable master SPI at clock rate Fck/16
+	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);
+  98:	81 e5       	ldi	r24, 0x51	; 81
+  9a:	8c bd       	out	0x2c, r24	; 44
+  9c:	08 95       	ret
+
+0000009e <SPIMasterSend>:
+
+//master send function
+void SPIMasterSend(uint8_t data)
+{
+	//select slave
+	PORTB &= ~(1<<PB2);
+  9e:	2a 98       	cbi	0x05, 2	; 5
+	//send data
+	SPDR=data;
+  a0:	8e bd       	out	0x2e, r24	; 46
+	//wait for transmition complete
+	while (!(SPSR &(1<<SPIF)));
+  a2:	0d b4       	in	r0, 0x2d	; 45
+  a4:	07 fe       	sbrs	r0, 7
+  a6:	fd cf       	rjmp	.-6      	; 0xa2 <SPIMasterSend+0x4>
+	//SS to high
+	PORTB |= (1<<PB2);
+  a8:	2a 9a       	sbi	0x05, 2	; 5
+  aa:	08 95       	ret
+
+000000ac <send_command>:
+}
+
+//send_command(uint8_t); send COMMAND to the screen
+void send_command(uint8_t data){
+PORTB &= 0xFE; // pull PORTB0 low to indicate command
+  ac:	28 98       	cbi	0x05, 0	; 5
+SPIMasterSend(data);
+  ae:	0e 94 4f 00 	call	0x9e	; 0x9e <SPIMasterSend>
+PORTB |= 0x01; // pull PORTB0 high to indicate data
+  b2:	28 9a       	sbi	0x05, 0	; 5
+  b4:	08 95       	ret
+
+000000b6 <send_data>:
+}
+
+
+//send_data(uint8_t); send DATA to the screen
+void send_data(uint8_t data){
+PORTB |= 0x01; // pull PORTB0 high to indicate data
+  b6:	28 9a       	sbi	0x05, 0	; 5
+SPIMasterSend(data);
+  b8:	0e 94 4f 00 	call	0x9e	; 0x9e <SPIMasterSend>
+PORTB &= 0xFE; // pull PORTB0 low to indicate command	
+  bc:	28 98       	cbi	0x05, 0	; 5
+  be:	08 95       	ret
+
+000000c0 <draw_zero>:
+}
+
+//below are draw functions. all start with a space.
+
+void draw_zero(void){
+	send_data(0x00);
+  c0:	80 e0       	ldi	r24, 0x00	; 0
+  c2:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+  c6:	8e e3       	ldi	r24, 0x3E	; 62
+  c8:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x22);
+  cc:	82 e2       	ldi	r24, 0x22	; 34
+  ce:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+  d2:	8e e3       	ldi	r24, 0x3E	; 62
+  d4:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+  d8:	08 95       	ret
+
+000000da <draw_one>:
+}
+
+void draw_one(void){
+	send_data(0x00);
+  da:	80 e0       	ldi	r24, 0x00	; 0
+  dc:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+  e0:	80 e0       	ldi	r24, 0x00	; 0
+  e2:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+  e6:	80 e0       	ldi	r24, 0x00	; 0
+  e8:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+  ec:	8e e3       	ldi	r24, 0x3E	; 62
+  ee:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+  f2:	08 95       	ret
+
+000000f4 <draw_two>:
+}
+
+void draw_two(void){
+	send_data(0x00);
+  f4:	80 e0       	ldi	r24, 0x00	; 0
+  f6:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3A);
+  fa:	8a e3       	ldi	r24, 0x3A	; 58
+  fc:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x2A);
+ 100:	8a e2       	ldi	r24, 0x2A	; 42
+ 102:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x2E);
+ 106:	8e e2       	ldi	r24, 0x2E	; 46
+ 108:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+ 10c:	08 95       	ret
+
+0000010e <draw_three>:
+}
+
+void draw_three(void){
+	send_data(0x00);
+ 10e:	80 e0       	ldi	r24, 0x00	; 0
+ 110:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x2A);
+ 114:	8a e2       	ldi	r24, 0x2A	; 42
+ 116:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x2A);
+ 11a:	8a e2       	ldi	r24, 0x2A	; 42
+ 11c:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 120:	8e e3       	ldi	r24, 0x3E	; 62
+ 122:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+ 126:	08 95       	ret
+
+00000128 <draw_four>:
+}
+
+void draw_four(void){
+	send_data(0x00);
+ 128:	80 e0       	ldi	r24, 0x00	; 0
+ 12a:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x0E);
+ 12e:	8e e0       	ldi	r24, 0x0E	; 14
+ 130:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x08);
+ 134:	88 e0       	ldi	r24, 0x08	; 8
+ 136:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 13a:	8e e3       	ldi	r24, 0x3E	; 62
+ 13c:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+ 140:	08 95       	ret
+
+00000142 <draw_five>:
+}
+
+void draw_five(void){
+	send_data(0x00);
+ 142:	80 e0       	ldi	r24, 0x00	; 0
+ 144:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x2E);
+ 148:	8e e2       	ldi	r24, 0x2E	; 46
+ 14a:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x2A);
+ 14e:	8a e2       	ldi	r24, 0x2A	; 42
+ 150:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3A);
+ 154:	8a e3       	ldi	r24, 0x3A	; 58
+ 156:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+ 15a:	08 95       	ret
+
+0000015c <draw_six>:
+}
+
+void draw_six(void){
+	send_data(0x00);
+ 15c:	80 e0       	ldi	r24, 0x00	; 0
+ 15e:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 162:	8e e3       	ldi	r24, 0x3E	; 62
+ 164:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x2A);
+ 168:	8a e2       	ldi	r24, 0x2A	; 42
+ 16a:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3A);
+ 16e:	8a e3       	ldi	r24, 0x3A	; 58
+ 170:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+ 174:	08 95       	ret
+
+00000176 <draw_seven>:
+}
+
+void draw_seven(void){
+	send_data(0x00);
+ 176:	80 e0       	ldi	r24, 0x00	; 0
+ 178:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x02);
+ 17c:	82 e0       	ldi	r24, 0x02	; 2
+ 17e:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x02);
+ 182:	82 e0       	ldi	r24, 0x02	; 2
+ 184:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 188:	8e e3       	ldi	r24, 0x3E	; 62
+ 18a:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+ 18e:	08 95       	ret
+
+00000190 <draw_eight>:
+}
+
+void draw_eight(void){
+	send_data(0x00);
+ 190:	80 e0       	ldi	r24, 0x00	; 0
+ 192:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 196:	8e e3       	ldi	r24, 0x3E	; 62
+ 198:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x2A);
+ 19c:	8a e2       	ldi	r24, 0x2A	; 42
+ 19e:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 1a2:	8e e3       	ldi	r24, 0x3E	; 62
+ 1a4:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+ 1a8:	08 95       	ret
+
+000001aa <draw_nine>:
+}
+
+void draw_nine(void){
+	send_data(0x00);
+ 1aa:	80 e0       	ldi	r24, 0x00	; 0
+ 1ac:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x0E);
+ 1b0:	8e e0       	ldi	r24, 0x0E	; 14
+ 1b2:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x0A);
+ 1b6:	8a e0       	ldi	r24, 0x0A	; 10
+ 1b8:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 1bc:	8e e3       	ldi	r24, 0x3E	; 62
+ 1be:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+ 1c2:	08 95       	ret
+
+000001c4 <draw_period>:
+}
+
+void draw_period(void){
+	send_data(0x00);
+ 1c4:	80 e0       	ldi	r24, 0x00	; 0
+ 1c6:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x20);
+ 1ca:	80 e2       	ldi	r24, 0x20	; 32
+ 1cc:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+ 1d0:	08 95       	ret
+
+000001d2 <draw_percent>:
+}
+
+//draw_percent(void); draws a percent symbol on the screen
+void draw_percent(void){
+	send_data(0x00);
+ 1d2:	80 e0       	ldi	r24, 0x00	; 0
+ 1d4:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 1d8:	8e e3       	ldi	r24, 0x3E	; 62
+ 1da:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x22);
+ 1de:	82 e2       	ldi	r24, 0x22	; 34
+ 1e0:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 1e4:	80 e0       	ldi	r24, 0x00	; 0
+ 1e6:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x42);
+ 1ea:	82 e4       	ldi	r24, 0x42	; 66
+ 1ec:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x25);
+ 1f0:	85 e2       	ldi	r24, 0x25	; 37
+ 1f2:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x12);
+ 1f6:	82 e1       	ldi	r24, 0x12	; 18
+ 1f8:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x08);
+ 1fc:	88 e0       	ldi	r24, 0x08	; 8
+ 1fe:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x24);
+ 202:	84 e2       	ldi	r24, 0x24	; 36
+ 204:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x52);
+ 208:	82 e5       	ldi	r24, 0x52	; 82
+ 20a:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x21);
+ 20e:	81 e2       	ldi	r24, 0x21	; 33
+ 210:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 214:	80 e0       	ldi	r24, 0x00	; 0
+ 216:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x22);
+ 21a:	82 e2       	ldi	r24, 0x22	; 34
+ 21c:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 220:	8e e3       	ldi	r24, 0x3E	; 62
+ 222:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+ 226:	08 95       	ret
+
+00000228 <draw_timeisrunningout>:
+}
+
+//fills one line with the message "TIME IS RUNNING OUT"
+void draw_timeisrunningout(void){
+	//time
+	send_data(0x02);
+ 228:	82 e0       	ldi	r24, 0x02	; 2
+ 22a:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 22e:	8e e3       	ldi	r24, 0x3E	; 62
+ 230:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x02);
+ 234:	82 e0       	ldi	r24, 0x02	; 2
+ 236:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 23a:	80 e0       	ldi	r24, 0x00	; 0
+ 23c:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 240:	8e e3       	ldi	r24, 0x3E	; 62
+ 242:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 246:	80 e0       	ldi	r24, 0x00	; 0
+ 248:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 24c:	8e e3       	ldi	r24, 0x3E	; 62
+ 24e:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x04);
+ 252:	84 e0       	ldi	r24, 0x04	; 4
+ 254:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x08);
+ 258:	88 e0       	ldi	r24, 0x08	; 8
+ 25a:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x04);
+ 25e:	84 e0       	ldi	r24, 0x04	; 4
+ 260:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 264:	8e e3       	ldi	r24, 0x3E	; 62
+ 266:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 26a:	80 e0       	ldi	r24, 0x00	; 0
+ 26c:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 270:	8e e3       	ldi	r24, 0x3E	; 62
+ 272:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x2A);
+ 276:	8a e2       	ldi	r24, 0x2A	; 42
+ 278:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 27c:	80 e0       	ldi	r24, 0x00	; 0
+ 27e:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 282:	80 e0       	ldi	r24, 0x00	; 0
+ 284:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	
+	//is
+	send_data(0x3E);
+ 288:	8e e3       	ldi	r24, 0x3E	; 62
+ 28a:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 28e:	80 e0       	ldi	r24, 0x00	; 0
+ 290:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x2C);
+ 294:	8c e2       	ldi	r24, 0x2C	; 44
+ 296:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x2A);
+ 29a:	8a e2       	ldi	r24, 0x2A	; 42
+ 29c:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x1A);
+ 2a0:	8a e1       	ldi	r24, 0x1A	; 26
+ 2a2:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 2a6:	80 e0       	ldi	r24, 0x00	; 0
+ 2a8:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 2ac:	80 e0       	ldi	r24, 0x00	; 0
+ 2ae:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	
+	//running
+	send_data(0x3E);
+ 2b2:	8e e3       	ldi	r24, 0x3E	; 62
+ 2b4:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x1A);
+ 2b8:	8a e1       	ldi	r24, 0x1A	; 26
+ 2ba:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x2E);
+ 2be:	8e e2       	ldi	r24, 0x2E	; 46
+ 2c0:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 2c4:	80 e0       	ldi	r24, 0x00	; 0
+ 2c6:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 2ca:	8e e3       	ldi	r24, 0x3E	; 62
+ 2cc:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x20);
+ 2d0:	80 e2       	ldi	r24, 0x20	; 32
+ 2d2:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 2d6:	8e e3       	ldi	r24, 0x3E	; 62
+ 2d8:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 2dc:	80 e0       	ldi	r24, 0x00	; 0
+ 2de:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 2e2:	8e e3       	ldi	r24, 0x3E	; 62
+ 2e4:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x04);
+ 2e8:	84 e0       	ldi	r24, 0x04	; 4
+ 2ea:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x08);
+ 2ee:	88 e0       	ldi	r24, 0x08	; 8
+ 2f0:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 2f4:	8e e3       	ldi	r24, 0x3E	; 62
+ 2f6:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 2fa:	80 e0       	ldi	r24, 0x00	; 0
+ 2fc:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 300:	8e e3       	ldi	r24, 0x3E	; 62
+ 302:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x04);
+ 306:	84 e0       	ldi	r24, 0x04	; 4
+ 308:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x08);
+ 30c:	88 e0       	ldi	r24, 0x08	; 8
+ 30e:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 312:	8e e3       	ldi	r24, 0x3E	; 62
+ 314:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 318:	80 e0       	ldi	r24, 0x00	; 0
+ 31a:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 31e:	8e e3       	ldi	r24, 0x3E	; 62
+ 320:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 324:	80 e0       	ldi	r24, 0x00	; 0
+ 326:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 32a:	8e e3       	ldi	r24, 0x3E	; 62
+ 32c:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x04);
+ 330:	84 e0       	ldi	r24, 0x04	; 4
+ 332:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x08);
+ 336:	88 e0       	ldi	r24, 0x08	; 8
+ 338:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 33c:	8e e3       	ldi	r24, 0x3E	; 62
+ 33e:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 342:	80 e0       	ldi	r24, 0x00	; 0
+ 344:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 348:	8e e3       	ldi	r24, 0x3E	; 62
+ 34a:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x22);
+ 34e:	82 e2       	ldi	r24, 0x22	; 34
+ 350:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3A);
+ 354:	8a e3       	ldi	r24, 0x3A	; 58
+ 356:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+		//out
+	send_data(0x00);
+ 35a:	80 e0       	ldi	r24, 0x00	; 0
+ 35c:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 360:	80 e0       	ldi	r24, 0x00	; 0
+ 362:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 366:	8e e3       	ldi	r24, 0x3E	; 62
+ 368:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x22);
+ 36c:	82 e2       	ldi	r24, 0x22	; 34
+ 36e:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 372:	8e e3       	ldi	r24, 0x3E	; 62
+ 374:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 378:	80 e0       	ldi	r24, 0x00	; 0
+ 37a:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 37e:	8e e3       	ldi	r24, 0x3E	; 62
+ 380:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x20);
+ 384:	80 e2       	ldi	r24, 0x20	; 32
+ 386:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 38a:	8e e3       	ldi	r24, 0x3E	; 62
+ 38c:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x00);
+ 390:	80 e0       	ldi	r24, 0x00	; 0
+ 392:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x02);
+ 396:	82 e0       	ldi	r24, 0x02	; 2
+ 398:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x3E);
+ 39c:	8e e3       	ldi	r24, 0x3E	; 62
+ 39e:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	send_data(0x02);
+ 3a2:	82 e0       	ldi	r24, 0x02	; 2
+ 3a4:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+ 3a8:	08 95       	ret
+
+000003aa <__vector_5>:
+}
+
+//INTERRUPT SERVICE ROUTINE
+ISR(PCINT2_vect) {
+ 3aa:	1f 92       	push	r1
+ 3ac:	0f 92       	push	r0
+ 3ae:	0f b6       	in	r0, 0x3f	; 63
+ 3b0:	0f 92       	push	r0
+ 3b2:	11 24       	eor	r1, r1
+ 3b4:	2f 93       	push	r18
+ 3b6:	3f 93       	push	r19
+ 3b8:	4f 93       	push	r20
+ 3ba:	5f 93       	push	r21
+ 3bc:	6f 93       	push	r22
+ 3be:	7f 93       	push	r23
+ 3c0:	8f 93       	push	r24
+ 3c2:	9f 93       	push	r25
+ 3c4:	af 93       	push	r26
+ 3c6:	bf 93       	push	r27
+ 3c8:	cf 93       	push	r28
+ 3ca:	df 93       	push	r29
+ 3cc:	ef 93       	push	r30
+ 3ce:	ff 93       	push	r31
+	send_command(0xAF); //turn the display on
+ 3d0:	8f ea       	ldi	r24, 0xAF	; 175
+ 3d2:	0e 94 56 00 	call	0xac	; 0xac <send_command>
+ 3d6:	d1 e0       	ldi	r29, 0x01	; 1
+ 3d8:	c0 e0       	ldi	r28, 0x00	; 0
+ 3da:	02 c0       	rjmp	.+4      	; 0x3e0 <__vector_5+0x36>
+ 3dc:	cf 5f       	subi	r28, 0xFF	; 255
+ 3de:	df 5f       	subi	r29, 0xFF	; 255
+	uint8_t j=0;
+	for(j=0;j<6;j++){
+		send_command(0xB0 | j); //set page address (0xb0 | address)
+ 3e0:	8c 2f       	mov	r24, r28
+ 3e2:	80 6b       	ori	r24, 0xB0	; 176
+ 3e4:	0e 94 56 00 	call	0xac	; 0xac <send_command>
+		
+		uint8_t add = 0x00; //column address
+		send_command((0x10|(add>>4))+0x02); //set column address part one
+ 3e8:	82 e1       	ldi	r24, 0x12	; 18
+ 3ea:	0e 94 56 00 	call	0xac	; 0xac <send_command>
+		send_command((0x0f&add));//set column address part two
+ 3ee:	80 e0       	ldi	r24, 0x00	; 0
+ 3f0:	0e 94 56 00 	call	0xac	; 0xac <send_command>
+		uint8_t i=0;
+		for(i=0;i<64;i++){
+			send_data(screenmemory[i+64*j]);
+		}
+		*/
+		if(j==1){
+ 3f4:	c1 30       	cpi	r28, 0x01	; 1
+ 3f6:	19 f4       	brne	.+6      	; 0x3fe <__vector_5+0x54>
+			draw_timeisrunningout();
+ 3f8:	0e 94 14 01 	call	0x228	; 0x228 <draw_timeisrunningout>
+ 3fc:	ef cf       	rjmp	.-34     	; 0x3dc <__vector_5+0x32>
+		}else{
+				draw_zero();
+ 3fe:	0e 94 60 00 	call	0xc0	; 0xc0 <draw_zero>
+				draw_one();
+ 402:	0e 94 6d 00 	call	0xda	; 0xda <draw_one>
+				draw_period();
+ 406:	0e 94 e2 00 	call	0x1c4	; 0x1c4 <draw_period>
+				draw_two();
+ 40a:	0e 94 7a 00 	call	0xf4	; 0xf4 <draw_two>
+				draw_three();
+ 40e:	0e 94 87 00 	call	0x10e	; 0x10e <draw_three>
+				draw_four();
+ 412:	0e 94 94 00 	call	0x128	; 0x128 <draw_four>
+				draw_five();
+ 416:	0e 94 a1 00 	call	0x142	; 0x142 <draw_five>
+				draw_six();
+ 41a:	0e 94 ae 00 	call	0x15c	; 0x15c <draw_six>
+				draw_seven();
+ 41e:	0e 94 bb 00 	call	0x176	; 0x176 <draw_seven>
+				
+				draw_eight();
+ 422:	0e 94 c8 00 	call	0x190	; 0x190 <draw_eight>
+				draw_nine();
+ 426:	0e 94 d5 00 	call	0x1aa	; 0x1aa <draw_nine>
+				for(uint8_t i=0;i<2;i++){
+				send_data(0x00);
+ 42a:	80 e0       	ldi	r24, 0x00	; 0
+ 42c:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+				send_data(0x00);
+ 430:	80 e0       	ldi	r24, 0x00	; 0
+ 432:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+				send_data(0x00);
+ 436:	80 e0       	ldi	r24, 0x00	; 0
+ 438:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+				send_data(0x00);
+ 43c:	80 e0       	ldi	r24, 0x00	; 0
+ 43e:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+				draw_seven();
+				
+				draw_eight();
+				draw_nine();
+				for(uint8_t i=0;i<2;i++){
+				send_data(0x00);
+ 442:	80 e0       	ldi	r24, 0x00	; 0
+ 444:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+				send_data(0x00);
+ 448:	80 e0       	ldi	r24, 0x00	; 0
+ 44a:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+				send_data(0x00);
+ 44e:	80 e0       	ldi	r24, 0x00	; 0
+ 450:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+				send_data(0x00);
+ 454:	80 e0       	ldi	r24, 0x00	; 0
+ 456:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+				}
+				draw_percent();
+ 45a:	0e 94 e9 00 	call	0x1d2	; 0x1d2 <draw_percent>
+
+//INTERRUPT SERVICE ROUTINE
+ISR(PCINT2_vect) {
+	send_command(0xAF); //turn the display on
+	uint8_t j=0;
+	for(j=0;j<6;j++){
+ 45e:	d6 30       	cpi	r29, 0x06	; 6
+ 460:	08 f4       	brcc	.+2      	; 0x464 <__vector_5+0xba>
+ 462:	bc cf       	rjmp	.-136    	; 0x3dc <__vector_5+0x32>
+ 464:	8a e0       	ldi	r24, 0x0A	; 10
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 466:	ef e4       	ldi	r30, 0x4F	; 79
+ 468:	f3 ec       	ldi	r31, 0xC3	; 195
+ 46a:	31 97       	sbiw	r30, 0x01	; 1
+ 46c:	f1 f7       	brne	.-4      	; 0x46a <__vector_5+0xc0>
+ 46e:	00 c0       	rjmp	.+0      	; 0x470 <__vector_5+0xc6>
+ 470:	00 00       	nop
+ 472:	81 50       	subi	r24, 0x01	; 1
+				}
+				draw_percent();
+		}
+		
+	}
+	for(j=0;j<10;j++){
+ 474:	c1 f7       	brne	.-16     	; 0x466 <__vector_5+0xbc>
+	_delay_ms(200); // Giant delay
+	}
+}
+ 476:	ff 91       	pop	r31
+ 478:	ef 91       	pop	r30
+ 47a:	df 91       	pop	r29
+ 47c:	cf 91       	pop	r28
+ 47e:	bf 91       	pop	r27
+ 480:	af 91       	pop	r26
+ 482:	9f 91       	pop	r25
+ 484:	8f 91       	pop	r24
+ 486:	7f 91       	pop	r23
+ 488:	6f 91       	pop	r22
+ 48a:	5f 91       	pop	r21
+ 48c:	4f 91       	pop	r20
+ 48e:	3f 91       	pop	r19
+ 490:	2f 91       	pop	r18
+ 492:	0f 90       	pop	r0
+ 494:	0f be       	out	0x3f, r0	; 63
+ 496:	0f 90       	pop	r0
+ 498:	1f 90       	pop	r1
+ 49a:	18 95       	reti
+
+0000049c <RTCInit>:
+
+//Timer2 init according to datasheet
+void RTCInit(void){
+	//Disable timer2 interrupts
+	TIMSK2  = 0;
+ 49c:	10 92 70 00 	sts	0x0070, r1
+	//Enable asynchronous mode
+	ASSR  = (1<<AS2);
+ 4a0:	80 e2       	ldi	r24, 0x20	; 32
+ 4a2:	80 93 b6 00 	sts	0x00B6, r24
+	//set initial counter value
+	TCNT2=0;
+ 4a6:	10 92 b2 00 	sts	0x00B2, r1
+	//set prescaler 128
+	TCCR2B |= (1<<CS22)|(1<<CS00);
+ 4aa:	e1 eb       	ldi	r30, 0xB1	; 177
+ 4ac:	f0 e0       	ldi	r31, 0x00	; 0
+ 4ae:	80 81       	ld	r24, Z
+ 4b0:	85 60       	ori	r24, 0x05	; 5
+ 4b2:	80 83       	st	Z, r24
+	//wait for registers update
+	while (ASSR & ((1<<TCN2UB)|(1<<TCR2BUB)));
+ 4b4:	e6 eb       	ldi	r30, 0xB6	; 182
+ 4b6:	f0 e0       	ldi	r31, 0x00	; 0
+ 4b8:	80 81       	ld	r24, Z
+ 4ba:	81 71       	andi	r24, 0x11	; 17
+ 4bc:	e9 f7       	brne	.-6      	; 0x4b8 <RTCInit+0x1c>
+	//clear interrupt flags
+	TIFR2  = (1<<TOV2);
+ 4be:	81 e0       	ldi	r24, 0x01	; 1
+ 4c0:	87 bb       	out	0x17, r24	; 23
+	//enable TOV2 interrupt
+	TIMSK2  = (1<<TOIE2);
+ 4c2:	80 93 70 00 	sts	0x0070, r24
+ 4c6:	08 95       	ret
+
+000004c8 <__vector_9>:
+}
+
+//Overflow ISR
+ISR(TIMER2_OVF_vect){
+ 4c8:	1f 92       	push	r1
+ 4ca:	0f 92       	push	r0
+ 4cc:	0f b6       	in	r0, 0x3f	; 63
+ 4ce:	0f 92       	push	r0
+ 4d0:	11 24       	eor	r1, r1
+ 4d2:	8f 93       	push	r24
+	num_overflows++;
+ 4d4:	80 91 00 01 	lds	r24, 0x0100
+ 4d8:	8f 5f       	subi	r24, 0xFF	; 255
+ 4da:	80 93 00 01 	sts	0x0100, r24
+}
+ 4de:	8f 91       	pop	r24
+ 4e0:	0f 90       	pop	r0
+ 4e2:	0f be       	out	0x3f, r0	; 63
+ 4e4:	0f 90       	pop	r0
+ 4e6:	1f 90       	pop	r1
+ 4e8:	18 95       	reti
+
+000004ea <main>:
+
+int main(void){
+	DDRB = 0x2F; //Set D/C, RST#, CS#, MOSI, SCK as Output
+ 4ea:	8f e2       	ldi	r24, 0x2F	; 47
+ 4ec:	84 b9       	out	0x04, r24	; 4
+	DDRD = 0x00; //PIND3=BUTTON_A, PIND2=BUTTON_B, PIND3=BUTTIONC
+ 4ee:	1a b8       	out	0x0a, r1	; 10
+	
+	RTCInit();
+ 4f0:	0e 94 4e 02 	call	0x49c	; 0x49c <RTCInit>
+	// Turn interrupts on.
+	sei();
+ 4f4:	78 94       	sei
+	
+	//set sleep mode to minimum power while allowing interrupt
+	set_sleep_mode(SLEEP_MODE_PWR_SAVE);
+ 4f6:	83 b7       	in	r24, 0x33	; 51
+ 4f8:	81 7f       	andi	r24, 0xF1	; 241
+ 4fa:	86 60       	ori	r24, 0x06	; 6
+ 4fc:	83 bf       	out	0x33, r24	; 51
+	PCICR |= _BV(PCIE2); //PIN CHANGE INTERRUPT CONTROL REGISTER (PIN BLOC PCINT16-23)
+ 4fe:	e8 e6       	ldi	r30, 0x68	; 104
+ 500:	f0 e0       	ldi	r31, 0x00	; 0
+ 502:	80 81       	ld	r24, Z
+ 504:	84 60       	ori	r24, 0x04	; 4
+ 506:	80 83       	st	Z, r24
+	PCMSK2 |= _BV(PCINT18); //PIN CHANGE interrupt MASK activate pin for BUTTON_B
+ 508:	ed e6       	ldi	r30, 0x6D	; 109
+ 50a:	f0 e0       	ldi	r31, 0x00	; 0
+ 50c:	80 81       	ld	r24, Z
+ 50e:	84 60       	ori	r24, 0x04	; 4
+ 510:	80 83       	st	Z, r24
+	
+	//initialize master SPI
+	SPIMasterInit();
+ 512:	0e 94 48 00 	call	0x90	; 0x90 <SPIMasterInit>
+
+	// Display reset routine (before initialization)
+	PORTB |= 0x02;	// Initially set RST HIGH
+ 516:	29 9a       	sbi	0x05, 1	; 5
+ 518:	81 ee       	ldi	r24, 0xE1	; 225
+ 51a:	94 e0       	ldi	r25, 0x04	; 4
+ 51c:	01 97       	sbiw	r24, 0x01	; 1
+ 51e:	f1 f7       	brne	.-4      	; 0x51c <main+0x32>
+ 520:	00 c0       	rjmp	.+0      	; 0x522 <main+0x38>
+ 522:	00 00       	nop
+	_delay_ms(5);	// VDD (3.3V) goes high at start, lets just chill for 5 ms
+	PORTB &= 0xFC;	// Bring RST low, reset the display
+ 524:	85 b1       	in	r24, 0x05	; 5
+ 526:	8c 7f       	andi	r24, 0xFC	; 252
+ 528:	85 b9       	out	0x05, r24	; 5
+ 52a:	83 ec       	ldi	r24, 0xC3	; 195
+ 52c:	99 e0       	ldi	r25, 0x09	; 9
+ 52e:	01 97       	sbiw	r24, 0x01	; 1
+ 530:	f1 f7       	brne	.-4      	; 0x52e <main+0x44>
+ 532:	00 c0       	rjmp	.+0      	; 0x534 <main+0x4a>
+ 534:	00 00       	nop
+	_delay_ms(10);	// wait 10ms
+	PORTB |= 0x02;	// Set RST HIGH, bring out of reset
+ 536:	29 9a       	sbi	0x05, 1	; 5
+	
+	
+	// Display initialization routine (after reset)
+	send_command(0x8D); //set charge pump
+ 538:	8d e8       	ldi	r24, 0x8D	; 141
+ 53a:	0e 94 56 00 	call	0xac	; 0xac <send_command>
+	send_command(0x14); //to some setting that's default in the sparkfun arduino library
+ 53e:	84 e1       	ldi	r24, 0x14	; 20
+ 540:	0e 94 56 00 	call	0xac	; 0xac <send_command>
+	
+	send_command(0xAF); //turn the display on
+ 544:	8f ea       	ldi	r24, 0xAF	; 175
+ 546:	0e 94 56 00 	call	0xac	; 0xac <send_command>
+	
+	send_command(0xB0); // sets to memory page 0 (0xB0 | desired page number)
+ 54a:	80 eb       	ldi	r24, 0xB0	; 176
+ 54c:	0e 94 56 00 	call	0xac	; 0xac <send_command>
+	
+	uint8_t j=0;
+	for(j=0;j<6;j++){
+ 550:	d0 e0       	ldi	r29, 0x00	; 0
+	send_command(0xB0 | j);
+	uint8_t i=0;
+	for(i=0;i<128;i++){
+ 552:	10 e0       	ldi	r17, 0x00	; 0
+	
+	send_command(0xB0); // sets to memory page 0 (0xB0 | desired page number)
+	
+	uint8_t j=0;
+	for(j=0;j<6;j++){
+	send_command(0xB0 | j);
+ 554:	8d 2f       	mov	r24, r29
+ 556:	80 6b       	ori	r24, 0xB0	; 176
+ 558:	0e 94 56 00 	call	0xac	; 0xac <send_command>
+	uint8_t i=0;
+	for(i=0;i<128;i++){
+ 55c:	c1 2f       	mov	r28, r17
+	send_data(i%16);
+ 55e:	8c 2f       	mov	r24, r28
+ 560:	8f 70       	andi	r24, 0x0F	; 15
+ 562:	0e 94 5b 00 	call	0xb6	; 0xb6 <send_data>
+	
+	uint8_t j=0;
+	for(j=0;j<6;j++){
+	send_command(0xB0 | j);
+	uint8_t i=0;
+	for(i=0;i<128;i++){
+ 566:	cf 5f       	subi	r28, 0xFF	; 255
+ 568:	c0 38       	cpi	r28, 0x80	; 128
+ 56a:	c9 f7       	brne	.-14     	; 0x55e <main+0x74>
+	send_command(0xAF); //turn the display on
+	
+	send_command(0xB0); // sets to memory page 0 (0xB0 | desired page number)
+	
+	uint8_t j=0;
+	for(j=0;j<6;j++){
+ 56c:	df 5f       	subi	r29, 0xFF	; 255
+ 56e:	d6 30       	cpi	r29, 0x06	; 6
+ 570:	89 f7       	brne	.-30     	; 0x554 <main+0x6a>
+	send_data(i%16);
+	}
+	}
+	
+	while(1){
+		send_command(0xAE); //display off command
+ 572:	8e ea       	ldi	r24, 0xAE	; 174
+ 574:	0e 94 56 00 	call	0xac	; 0xac <send_command>
+		sleep_mode();
+ 578:	83 b7       	in	r24, 0x33	; 51
+ 57a:	81 60       	ori	r24, 0x01	; 1
+ 57c:	83 bf       	out	0x33, r24	; 51
+ 57e:	88 95       	sleep
+ 580:	83 b7       	in	r24, 0x33	; 51
+ 582:	8e 7f       	andi	r24, 0xFE	; 254
+ 584:	83 bf       	out	0x33, r24	; 51
+ 586:	f5 cf       	rjmp	.-22     	; 0x572 <main+0x88>
+
+00000588 <_exit>:
+ 588:	f8 94       	cli
+
+0000058a <__stop_program>:
+ 58a:	ff cf       	rjmp	.-2      	; 0x58a <__stop_program>
