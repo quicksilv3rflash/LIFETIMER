@@ -25,12 +25,21 @@ Sleeping with POWER DOWN mode: 0.3mA (Asynchronous timer no longer works)
 #include <avr/sleep.h>
 #include <util/atomic.h>
 
+//right now I have about 68.07151992 % of my life remaining. The last digit should be decremented 4 times a second,
+//assuming I have 2,500,000,000 seconds to live total (~79.2219 years, a convenient estimate for coding)
+//the percentage will be in the form: AB.CDEFGHIJ
+volatile uint8_t AB = 68;
+volatile uint8_t CD = 07;
+volatile uint8_t EF = 15;
+volatile uint8_t GH = 19;
+volatile uint8_t IJ = 96;
+
 
 volatile uint8_t number_of_frames_displayed = 0;
 volatile uint8_t num_overflows = 0;
-volatile uint8_t seconds = 0;
-volatile uint8_t minutes = 0;
-volatile uint8_t hours = 0;
+volatile uint8_t seconds = 00;
+volatile uint8_t minutes = 33;
+volatile uint8_t hours = 13;
 
 //SPI init
 void SPIMasterInit(void)
@@ -266,7 +275,14 @@ void draw_digit(uint8_t digit){
 	}
 }
 
-
+//void displaytimeunit(uint8_t timeunit); displays time unit
+void displaytimeunit(uint8_t timeunit){
+uint8_t timeunit_now = timeunit; //stores volatile into timeunit_now which will be manipulated for display
+draw_digit((timeunit_now - (timeunit_now % 10))/10);
+draw_digit(timeunit_now % 10);
+}
+	
+	
 //void refresh_screen(void); refreshes the screen
 void refresh_screen(void){
 	uint8_t j=0;
@@ -283,18 +299,13 @@ void refresh_screen(void){
 		}
 		*/
 		if(j == 0){
-			draw_zero();
-			draw_one();
+			displaytimeunit(AB);
 			draw_period();
-			draw_two();
-			draw_three();
-			draw_four();
-			draw_five();
-			draw_six();
-			draw_seven();
-				
-			draw_eight();
-			draw_nine();
+			displaytimeunit(CD);
+			displaytimeunit(EF);
+			displaytimeunit(GH);
+			displaytimeunit(IJ);	
+			
 			for(uint8_t i=0;i<2;i++){
 				send_data(0x00);
 				send_data(0x00);
@@ -307,17 +318,32 @@ void refresh_screen(void){
 			draw_timeisrunningout();
 		}
 		if(j==2){
-			uint8_t seconds_now = seconds; //stores volatile SECONDS into seconds_now which will be manipulated for display
-			draw_digit(seconds_now % 10);
-			draw_digit((seconds_now - (seconds_now % 10))/10);
+			displaytimeunit(hours);
+			send_data(0x00);
+			send_data(0x22);
+			send_data(0x00);
+			displaytimeunit(minutes);
+			send_data(0x00);
+			send_data(0x22);
+			send_data(0x00);
+			displaytimeunit(seconds);	
+			send_data(0x00);
+			send_data(0x00);
+			send_data(0x00);
+			send_data(0x00);
+			send_data(0x00);
+			send_data(0x00);
+			send_data(0x00);
+			send_data(0x00);
 		}		
 	}
 }
 
 //INTERRUPT SERVICE ROUTINE FOR PIN CHANGE (BUTTON PRESS)
 ISR(PCINT2_vect) {
-	number_of_frames_displayed=0;
 	
+	number_of_frames_displayed = 0;
+	//resetting this variable to zero causes the screen to be turned on for a bit while it's re-incremented
 }
 
 //Timer2 init according to datasheet
@@ -328,8 +354,8 @@ void RTCInit(void){
 	ASSR  = (1<<AS2);
 	//set initial counter value
 	TCNT2=0;
-	//set prescaler 128
-	TCCR2B |= (1<<CS22)|(1<<CS00);
+	//set prescaler 32 (update every 1/4 second)
+	TCCR2B |= (1<<CS21)|(1<<CS00);
 	//wait for registers update
 	while (ASSR & ((1<<TCN2UB)|(1<<TCR2BUB)));
 	//clear interrupt flags
@@ -340,8 +366,39 @@ void RTCInit(void){
 
 //Overflow ISR
 ISR(TIMER2_OVF_vect){
+	uint8_t frames_until_turnoff = 35;
+	
+	if(number_of_frames_displayed == 0){
+		send_command(0xAF); //turn the display on
+	}	
+	if(number_of_frames_displayed < frames_until_turnoff){
+		refresh_screen();
+		number_of_frames_displayed++;
+	}else if(number_of_frames_displayed >= frames_until_turnoff){
+		send_command(0xAE); //display off command
+	}
+	
+	IJ--;
+	if(IJ == 0){
+		IJ = 99;
+		GH--;
+		if(GH == 0){
+			GH = 99;
+			EF--;
+			if(EF == 0){
+				EF = 99;
+				CD--;
+				if(CD == 0){
+					CD = 99;
+					AB--;
+				}
+			}
+		}
+	}
+	
+	
 	num_overflows++;
-	if(/*num_overflows % 1 == 0*/ 1){
+	if(num_overflows % 4 == 0){
 		seconds++;
 		if(seconds == 60){
 			seconds = 0;
@@ -399,23 +456,12 @@ int main(void){
 	}
 	
 	while(1){
-send_command(0xAF); //turn the display on
-		if(1){
-			
-			uint8_t j=0;
-			for(j=0;j<5;j++){
-			refresh_screen();
-			number_of_frames_displayed++;
-			_delay_ms(100); // Giant delay
-			}
-		}
-		
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE){
-		if(number_of_frames_displayed >= 10){
-		send_command(0xAE); //display off command
+
+
+
+
 		sleep_mode();
-		}
-		}
+
 		
 		
 	
