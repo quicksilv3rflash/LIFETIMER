@@ -18,6 +18,10 @@ Discarded input sections
  .text          0x00000000        0x0 lifetimer.o
  .data          0x00000000        0x0 lifetimer.o
  .bss           0x00000000        0x0 lifetimer.o
+ .text.draw_deg_n
+                0x00000000        0x2 lifetimer.o
+ .text.draw_deg_e
+                0x00000000        0x2 lifetimer.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_divmodhi4.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_divmodhi4.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_divmodhi4.o)
@@ -211,7 +215,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x7dc
+.text           0x00000000     0x225c
  *(.vectors)
  .vectors       0x00000000       0x68 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm328p.o
                 0x00000000                __vector_default
@@ -342,40 +346,85 @@ END GROUP
  .text.draw_percent
                 0x000001e8       0x56 lifetimer.o
                 0x000001e8                draw_percent
- .text.draw_timeisrunningout
+ .text.draw_newordersfrom
                 0x0000023e      0x182 lifetimer.o
-                0x0000023e                draw_timeisrunningout
+                0x0000023e                draw_newordersfrom
+ .text.draw_machineempire
+                0x000003c0      0x182 lifetimer.o
+                0x000003c0                draw_machineempire
+ .text.draw_highcommand
+                0x00000542      0x182 lifetimer.o
+                0x00000542                draw_highcommand
+ .text.draw_timeisrunningout
+                0x000006c4      0x182 lifetimer.o
+                0x000006c4                draw_timeisrunningout
  .text.draw_digit
-                0x000003c0       0x64 lifetimer.o
-                0x000003c0                draw_digit
+                0x00000846       0x64 lifetimer.o
+                0x00000846                draw_digit
  .text.displaytimeunit
-                0x00000424       0x42 lifetimer.o
-                0x00000424                displaytimeunit
+                0x000008aa       0x42 lifetimer.o
+                0x000008aa                displaytimeunit
+ .text.draw_letter
+                0x000008ec      0x444 lifetimer.o
+                0x000008ec                draw_letter
+ .text.draw_blankline
+                0x00000d30       0x12 lifetimer.o
+                0x00000d30                draw_blankline
+ .text.draw_stopandmeditate
+                0x00000d42      0x182 lifetimer.o
+                0x00000d42                draw_stopandmeditate
+ .text.draw_tendself
+                0x00000ec4       0xf0 lifetimer.o
+                0x00000ec4                draw_tendself
+ .text.draw_climbmarshill
+                0x00000fb4      0x14a lifetimer.o
+                0x00000fb4                draw_climbmarshill
+ .text.draw_benefitnearest
+                0x000010fe      0x16e lifetimer.o
+                0x000010fe                draw_benefitnearest
+ .text.draw_person
+                0x0000126c       0xa8 lifetimer.o
+                0x0000126c                draw_person
+ .text.draw_fixsomething
+                0x00001314      0x13e lifetimer.o
+                0x00001314                draw_fixsomething
+ .text.draw_goto
+                0x00001452       0x7e lifetimer.o
+                0x00001452                draw_goto
+ .text.draw_getxxxx
+                0x000014d0      0x1b2 lifetimer.o
+                0x000014d0                draw_getxxxx
+ .text.draw_changebearing
+                0x00001682      0x150 lifetimer.o
+                0x00001682                draw_changebearing
+ .text.draw_toxx
+                0x000017d2      0x1fc lifetimer.o
+                0x000017d2                draw_toxx
  .text.refresh_screen
-                0x00000466      0x110 lifetimer.o
-                0x00000466                refresh_screen
+                0x000019ce      0x484 lifetimer.o
+                0x000019ce                refresh_screen
  .text.__vector_5
-                0x00000576       0x18 lifetimer.o
-                0x00000576                __vector_5
- .text.RTCInit  0x0000058e       0x2c lifetimer.o
-                0x0000058e                RTCInit
+                0x00001e52       0x18 lifetimer.o
+                0x00001e52                __vector_5
+ .text.RTCInit  0x00001e6a       0x2c lifetimer.o
+                0x00001e6a                RTCInit
  .text.__vector_9
-                0x000005ba      0x136 lifetimer.o
-                0x000005ba                __vector_9
- .text.main     0x000006f0       0x98 lifetimer.o
-                0x000006f0                main
+                0x00001e96      0x2a4 lifetimer.o
+                0x00001e96                __vector_9
+ .text.main     0x0000213a       0xce lifetimer.o
+                0x0000213a                main
  .text.libgcc.div
-                0x00000788       0x28 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_divmodhi4.o)
-                0x00000788                _div
-                0x00000788                __divmodhi4
+                0x00002208       0x28 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_divmodhi4.o)
+                0x00002208                _div
+                0x00002208                __divmodhi4
  .text.libgcc.div
-                0x000007b0       0x28 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_udivmodhi4.o)
-                0x000007b0                __udivmodhi4
-                0x000007d8                . = ALIGN (0x2)
+                0x00002230       0x28 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_udivmodhi4.o)
+                0x00002230                __udivmodhi4
+                0x00002258                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000007d8        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
-                0x000007d8                _exit
-                0x000007d8                exit
+ .fini9         0x00002258        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
+                0x00002258                _exit
+                0x00002258                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -394,59 +443,88 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000007d8        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
+ .fini0         0x00002258        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000007dc                _etext = .
+                0x0000225c                _etext = .
 
-.data           0x00800100        0x8 load address 0x000007dc
+.data           0x00800100        0xa load address 0x0000225c
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
- .data.hours    0x00800100        0x1 lifetimer.o
-                0x00800100                hours
- .data.minutes  0x00800101        0x1 lifetimer.o
-                0x00800101                minutes
- .data.IJ       0x00800102        0x1 lifetimer.o
-                0x00800102                IJ
- .data.GH       0x00800103        0x1 lifetimer.o
-                0x00800103                GH
- .data.EF       0x00800104        0x1 lifetimer.o
-                0x00800104                EF
- .data.CD       0x00800105        0x1 lifetimer.o
-                0x00800105                CD
- .data.AB       0x00800106        0x1 lifetimer.o
-                0x00800106                AB
+ .data.years    0x00800100        0x1 lifetimer.o
+                0x00800100                years
+ .data.months   0x00800101        0x1 lifetimer.o
+                0x00800101                months
+ .data.days     0x00800102        0x1 lifetimer.o
+                0x00800102                days
+ .data.hours    0x00800103        0x1 lifetimer.o
+                0x00800103                hours
+ .data.minutes  0x00800104        0x1 lifetimer.o
+                0x00800104                minutes
+ .data.IJ       0x00800105        0x1 lifetimer.o
+                0x00800105                IJ
+ .data.GH       0x00800106        0x1 lifetimer.o
+                0x00800106                GH
+ .data.EF       0x00800107        0x1 lifetimer.o
+                0x00800107                EF
+ .data.CD       0x00800108        0x1 lifetimer.o
+                0x00800108                CD
+ .data.AB       0x00800109        0x1 lifetimer.o
+                0x00800109                AB
  *(.rodata)
  *(.rodata*)
  *(.gnu.linkonce.d*)
-                0x00800108                . = ALIGN (0x2)
- *fill*         0x00800107        0x1 
-                0x00800108                _edata = .
-                0x00800108                PROVIDE (__data_end, .)
+                0x0080010a                . = ALIGN (0x2)
+                0x0080010a                _edata = .
+                0x0080010a                PROVIDE (__data_end, .)
 
-.bss            0x00800108        0x3
-                0x00800108                PROVIDE (__bss_start, .)
+.bss            0x0080010a       0x1d
+                0x0080010a                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.seconds   0x00800108        0x1 lifetimer.o
-                0x00800108                seconds
+ .bss.seconds   0x0080010a        0x1 lifetimer.o
+                0x0080010a                seconds
  .bss.num_overflows
-                0x00800109        0x1 lifetimer.o
-                0x00800109                num_overflows
+                0x0080010b        0x1 lifetimer.o
+                0x0080010b                num_overflows
  .bss.number_of_frames_displayed
-                0x0080010a        0x1 lifetimer.o
-                0x0080010a                number_of_frames_displayed
+                0x0080010c        0x1 lifetimer.o
+                0x0080010c                number_of_frames_displayed
+ .bss.previous_MEHC_order
+                0x0080010d        0xa lifetimer.o
+                0x0080010d                previous_MEHC_order
+ .bss.current_MEHC_order
+                0x00800117        0xa lifetimer.o
+                0x00800117                current_MEHC_order
+ .bss.hours_until_next_MEHC_order
+                0x00800121        0x1 lifetimer.o
+                0x00800121                hours_until_next_MEHC_order
+ .bss.order_array_index
+                0x00800122        0x1 lifetimer.o
+                0x00800122                order_array_index
+ .bss.rand_int_loaded
+                0x00800123        0x1 lifetimer.o
+                0x00800123                rand_int_loaded
+ .bss.rand_int_locked
+                0x00800124        0x1 lifetimer.o
+                0x00800124                rand_int_locked
+ .bss.order_entry_mode_flag
+                0x00800125        0x1 lifetimer.o
+                0x00800125                order_entry_mode_flag
+ .bss.displayvar
+                0x00800126        0x1 lifetimer.o
+                0x00800126                displayvar
  *(COMMON)
-                0x0080010b                PROVIDE (__bss_end, .)
-                0x000007dc                __data_load_start = LOADADDR (.data)
-                0x000007e4                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800127                PROVIDE (__bss_end, .)
+                0x0000225c                __data_load_start = LOADADDR (.data)
+                0x00002266                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080010b        0x0
-                0x0080010b                PROVIDE (__noinit_start, .)
+.noinit         0x00800127        0x0
+                0x00800127                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x0080010b                PROVIDE (__noinit_end, .)
-                0x0080010b                _end = .
-                0x0080010b                PROVIDE (__heap_start, .)
+                0x00800127                PROVIDE (__noinit_end, .)
+                0x00800127                _end = .
+                0x00800127                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -505,38 +583,38 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0xd8
+.debug_aranges  0x00000000      0x160
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0xd8 lifetimer.o
+                0x00000000      0x160 lifetimer.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x11af
+.debug_info     0x00000000     0x529d
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000     0x11af lifetimer.o
+ .debug_info    0x00000000     0x529d lifetimer.o
 
-.debug_abbrev   0x00000000      0x1ff
+.debug_abbrev   0x00000000      0x249
  *(.debug_abbrev)
- .debug_abbrev  0x00000000      0x1ff lifetimer.o
+ .debug_abbrev  0x00000000      0x249 lifetimer.o
 
-.debug_line     0x00000000      0x3cc
+.debug_line     0x00000000      0xb49
  *(.debug_line .debug_line.* .debug_line_end)
- .debug_line    0x00000000      0x3cc lifetimer.o
+ .debug_line    0x00000000      0xb49 lifetimer.o
 
-.debug_frame    0x00000000      0x1fc
+.debug_frame    0x00000000      0x374
  *(.debug_frame)
- .debug_frame   0x00000000      0x1fc lifetimer.o
+ .debug_frame   0x00000000      0x374 lifetimer.o
 
-.debug_str      0x00000000      0x2db
+.debug_str      0x00000000      0x4a9
  *(.debug_str)
- .debug_str     0x00000000      0x2db lifetimer.o
-                                0x323 (size before relaxing)
+ .debug_str     0x00000000      0x4a9 lifetimer.o
+                                0x4f7 (size before relaxing)
 
-.debug_loc      0x00000000      0x3a6
+.debug_loc      0x00000000     0x1053
  *(.debug_loc)
- .debug_loc     0x00000000      0x3a6 lifetimer.o
+ .debug_loc     0x00000000     0x1053 lifetimer.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -556,9 +634,9 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0xc8
+.debug_ranges   0x00000000      0x150
  *(.debug_ranges)
- .debug_ranges  0x00000000       0xc8 lifetimer.o
+ .debug_ranges  0x00000000      0x150 lifetimer.o
 
 .debug_macro
  *(.debug_macro)
