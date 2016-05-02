@@ -25,15 +25,15 @@ Sleeping with POWER DOWN mode: 0.3mA (Asynchronous timer no longer works)
 #include <avr/sleep.h>
 #include <util/atomic.h>
 
-//right now I have about 68.07151992 % of my life remaining. The last digit should be decremented 4 times a second,
+//right now I have about 68.03293884 % of my life remaining. The last digit should be decremented 4 times a second,
 //assuming I have 2,500,000,000 seconds to live total (~79.2219 years, a convenient estimate for coding)
 //the percentage is calculated by (2,500,000,000 - #of seconds since january 4th 1991)/2,500,000,000
 //the percentage will be in the form: AB.CDEFGHIJ, and the J digit will be decremented every 1/4 second.
 volatile uint8_t AB = 68;
-volatile uint8_t CD = 05;
-volatile uint8_t EF = 73;
-volatile uint8_t GH = 43;
-volatile uint8_t IJ = 96;
+volatile uint8_t CD = 03;
+volatile uint8_t EF = 29;
+volatile uint8_t GH = 34;
+volatile uint8_t IJ = 84;
 
 volatile uint8_t displayvar = 0; 
 //if 0, display nothing/new order message
@@ -52,11 +52,14 @@ volatile uint8_t previous_MEHC_order[] = {0,0,0,0,0,0,0,0,0,0};
 volatile uint8_t number_of_frames_displayed = 0;
 volatile uint8_t num_overflows = 0;
 volatile uint8_t seconds = 00;
-volatile uint8_t minutes = 54;
-volatile uint8_t hours = 15;
-volatile uint8_t days = 24;
-volatile uint8_t months = 4;
+volatile uint8_t minutes = 30;
+volatile uint8_t hours = 17;
+volatile uint8_t days = 1;
+volatile uint8_t months = 5;
 volatile uint8_t years = 16; //rofl Y2K bug again
+
+uint32_t nucleus_north[] = {23641,23414,22693,22490,21475,21442,21389,21372,21427,21431,21432,20414,20453,20451,20509,20470,20400,19569,19534,19558,19597,19462,19464,18256,18315,18213,17380,17303,17426,16384,16437,16374};
+uint32_t nucleus_east[] = {67113,57203,65765,57895,65426,64234,63204,61635,60309,59019,59746,65479,64260,63178,61672,60365,59129,65421,64271,63176,61713,60428,59239,67567,66172,64987,67577,66127,65024,67582,66178,65067};
 
 //SPI init
 void SPIMasterInit(void)
@@ -1074,11 +1077,140 @@ void draw_goto(void){
 }
 
 void draw_deg_n(uint8_t current_or_past){//1=current, 2=past, uses MEHC_order[2] to set nucleus, MEHC_order[3] to vary N/S
+	uint8_t nucleus_index = 0;
+	uint8_t variance = 0;
+	// draws "+"
+	send_data(0x00);
+	send_data(0x08);
+	send_data(0x1C);
+	send_data(0x08);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
 	
+	//draws "35."
+	displaytimeunit(35);
+	draw_period();
+
+	if(current_or_past == 1){//if current
+		nucleus_index = (current_MEHC_order[2] % 32);
+		variance = current_MEHC_order[3];		
+	}
+	if(current_or_past == 2){//if past
+		nucleus_index = (previous_MEHC_order[2] % 32);
+		variance = previous_MEHC_order[3];	
+	}
+	
+		//modifiable display data goes here
+	if(variance > 126){
+		displaytimeunit((uint8_t) (((nucleus_north[nucleus_index] / 10) + (variance % 64)) / 100));
+		displaytimeunit((uint8_t) (((nucleus_north[nucleus_index] / 10) + (variance % 64)) % 100));
+	}else{
+		displaytimeunit((uint8_t) (((nucleus_north[nucleus_index] / 10) - (variance % 64)) / 100));
+		displaytimeunit((uint8_t) (((nucleus_north[nucleus_index] / 10) - (variance % 64)) % 100));
+	}
+	
+	
+	
+	draw_digit((uint8_t) (nucleus_north[nucleus_index] % 10));
+	
+	//draws "[ {deg}N ]"
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	
+	send_data(0x3E);
+	send_data(0x22);
+	
+	send_data(0x00);
+	send_data(0x00);
+	
+	send_data(0x02);
+	send_data(0x05);
+	send_data(0x02);
+	send_data(0x00);
+	
+	draw_letter(13);
+	
+	send_data(0x00);
+	send_data(0x22);
+	send_data(0x3E);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
 }
 
 void draw_deg_e(uint8_t current_or_past){//1=current, 2=past, uses MEHC_order[2] to set nucleus, MEHC_order[4] to vary E/W
+	uint8_t nucleus_index = 0;
+	uint8_t variance = 0;
+	// draws "-1"
+	send_data(0x00);
+	send_data(0x08);
+	send_data(0x08);
+	send_data(0x08);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x3E);
 	
+	//draws "11."
+	displaytimeunit(11);
+	draw_period();
+	
+
+	
+	if(current_or_past == 1){//if current
+		nucleus_index = (current_MEHC_order[2] % 32);
+		variance = current_MEHC_order[4];		
+	}
+	if(current_or_past == 2){//if past
+		nucleus_index = (previous_MEHC_order[2] % 32);
+		variance = previous_MEHC_order[4];		
+	}
+	
+		//modifiable display data goes here
+	if(variance > 126){
+		displaytimeunit((uint8_t) (((nucleus_east[nucleus_index] / 10) + (variance % 64)) / 100));
+		displaytimeunit((uint8_t) (((nucleus_east[nucleus_index] / 10) + (variance % 64)) % 100));
+		}else{
+		displaytimeunit((uint8_t) (((nucleus_east[nucleus_index] / 10) - (variance % 64)) / 100));
+		displaytimeunit((uint8_t) (((nucleus_east[nucleus_index] / 10) - (variance % 64)) % 100));
+	}
+	
+	
+	draw_digit((uint8_t) (nucleus_east[nucleus_index] % 10));
+	
+	//draws "[ {deg}E ]"
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	
+	send_data(0x3E);
+	send_data(0x22);
+	
+	send_data(0x00);
+	send_data(0x00);
+	
+	send_data(0x02);
+	send_data(0x05);
+	send_data(0x02);
+	send_data(0x00);
+	
+	draw_letter(4);
+	
+	send_data(0x00);
+	send_data(0x22);
+	send_data(0x3E);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
 }
 	
 void draw_getxxxx(uint8_t current_or_past){ //1=current, 2=past
@@ -1438,7 +1570,7 @@ void refresh_screen(void){
 				draw_fixsomething();
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 5)){
-				//draw_goto();
+				draw_deg_n(1);
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 6)){
 				draw_getxxxx(1); //1=current, 2=past | oh boy I get to learn about feeding pointers to arrays into functions!!! ^.^ (BUT NOT TODAY JUST MORE KLUDGES)
@@ -1463,7 +1595,7 @@ void refresh_screen(void){
 				draw_fixsomething();
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 5)){
-				//draw_goto();
+				draw_deg_n(2);
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 6)){
 				draw_getxxxx(2); //1=current, 2=past
@@ -1498,7 +1630,7 @@ void refresh_screen(void){
 				draw_blankline();
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 5)){
-				//draw_goto();
+				draw_deg_e(1);
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 6)){
 				draw_blankline();
@@ -1523,7 +1655,7 @@ void refresh_screen(void){
 				draw_blankline();
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 5)){
-				//draw_goto();
+				draw_deg_e(2);
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 6)){
 				draw_blankline();
@@ -1595,7 +1727,7 @@ ISR(TIMER2_OVF_vect){
 			order_array_index++;
 		}
 		
-		/*uncommenting this will set the timer to actually delay the orders
+		///*uncommenting this will set the timer to actually delay the orders
 		if(order_array_index >= 7){
 			hours_until_next_MEHC_order = current_MEHC_order[6];			
 		}
