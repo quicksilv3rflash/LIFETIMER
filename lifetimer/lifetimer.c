@@ -25,15 +25,15 @@ Sleeping with POWER DOWN mode: 0.3mA (Asynchronous timer no longer works)
 #include <avr/sleep.h>
 #include <util/atomic.h>
 
-//right now I have about 68.03293884 % of my life remaining. The last digit should be decremented 4 times a second,
+//right now I have about 68.00889000 % of my life remaining. The last digit should be decremented 4 times a second,
 //assuming I have 2,500,000,000 seconds to live total (~79.2219 years, a convenient estimate for coding)
 //the percentage is calculated by (2,500,000,000 - #of seconds since january 4th 1991)/2,500,000,000
 //the percentage will be in the form: AB.CDEFGHIJ, and the J digit will be decremented every 1/4 second.
-volatile uint8_t AB = 68;
-volatile uint8_t CD = 03;
-volatile uint8_t EF = 29;
-volatile uint8_t GH = 34;
-volatile uint8_t IJ = 84;
+volatile uint8_t AB = 67;
+volatile uint8_t CD = 99;
+volatile uint8_t EF = 52;
+volatile uint8_t GH = 90;
+volatile uint8_t IJ = 00;
 
 volatile uint8_t displayvar = 0; 
 //if 0, display nothing/new order message
@@ -52,9 +52,9 @@ volatile uint8_t previous_MEHC_order[] = {0,0,0,0,0,0,0,0,0,0};
 volatile uint8_t number_of_frames_displayed = 0;
 volatile uint8_t num_overflows = 0;
 volatile uint8_t seconds = 00;
-volatile uint8_t minutes = 30;
-volatile uint8_t hours = 17;
-volatile uint8_t days = 1;
+volatile uint8_t minutes = 53;
+volatile uint8_t hours = 14;
+volatile uint8_t days = 12;
 volatile uint8_t months = 5;
 volatile uint8_t years = 16; //rofl Y2K bug again
 
@@ -195,6 +195,292 @@ void draw_percent(void){
 	send_data(0x22);
 	send_data(0x3E);
 }
+
+//the draw_top_x and draw_bottom_x commands are for big digits spanning two lines. digits start with 3 spaces and are 9 pixels wide.
+void draw_top_zero(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0x0E);
+	send_data(0x0E);
+	send_data(0x0E);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0xFE);
+}
+void draw_top_one(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0xFE);
+}
+void draw_top_two(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0xFE);
+}
+void draw_top_three(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0xFE);
+}
+void draw_top_four(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0x80);
+	send_data(0x80);
+	send_data(0x80);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0xFE);
+}
+void draw_top_five(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0x8E);
+}
+void draw_top_six(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0x8E);
+}
+void draw_top_seven(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x0E);
+	send_data(0x0E);
+	send_data(0x0E);
+	send_data(0x0E);
+	send_data(0x0E);
+	send_data(0x0E);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0xFE);
+}
+void draw_top_eight(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0xFE);
+}
+void draw_top_nine(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0x8E);
+	send_data(0xFE);
+	send_data(0xFE);
+	send_data(0xFE);
+}
+	
+	
+void draw_bottom_zero(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0xFF);
+	send_data(0xFF);
+	send_data(0xFF);
+	send_data(0xE0);
+	send_data(0xE0);
+	send_data(0xE0);
+	send_data(0xFF);
+	send_data(0xFF);
+	send_data(0xFF);
+}
+void draw_bottom_one(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0xFF);
+	send_data(0xFF);
+	send_data(0xFF);
+}
+void draw_bottom_two(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0xFF);
+	send_data(0xFF);
+	send_data(0xFF);
+	send_data(0xE3);
+	send_data(0xE3);
+	send_data(0xE3);
+	send_data(0xE3);
+	send_data(0xE3);
+	send_data(0xE3);
+}
+void draw_bottom_three(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0xE3);
+	send_data(0xE3);
+	send_data(0xE3);
+	send_data(0xE3);
+	send_data(0xE3);
+	send_data(0xE3);
+	send_data(0xFF);
+	send_data(0xFF);
+	send_data(0xFF);
+}
+void draw_bottom_four(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x03);
+	send_data(0x03);
+	send_data(0x03);
+	send_data(0x03);
+	send_data(0x03);
+	send_data(0x03);
+	send_data(0xFF);
+	send_data(0xFF);
+	send_data(0xFF);
+}
+void draw_bottom_five(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0xE3);
+	send_data(0xE3);
+	send_data(0xE3);
+	send_data(0xE3);
+	send_data(0xE3);
+	send_data(0xE3);
+	send_data(0xFF);
+	send_data(0xFF);
+	send_data(0xFF);
+}
+void draw_bottom_six(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0xFF);
+	send_data(0xFF);
+	send_data(0xFF);
+	send_data(0xE3);
+	send_data(0xE3);
+	send_data(0xE3);
+	send_data(0xFF);
+	send_data(0xFF);
+	send_data(0xFF);
+}
+void draw_bottom_seven(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0xFF);
+	send_data(0xFF);
+	send_data(0xFF);
+}
+void draw_bottom_eight(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0xFF);
+	send_data(0xFF);
+	send_data(0xFF);
+	send_data(0xE3);
+	send_data(0xE3);
+	send_data(0xE3);
+	send_data(0xFF);
+	send_data(0xFF);
+	send_data(0xFF);
+}
+void draw_bottom_nine(void){
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x00);
+	send_data(0x03);
+	send_data(0x03);
+	send_data(0x03);
+	send_data(0x03);
+	send_data(0x03);
+	send_data(0x03);
+	send_data(0xFF);
+	send_data(0xFF);
+	send_data(0xFF);
+}
+	
+	
 
 //fills one line with them message "NEW ORDERS FROM"
 void draw_newordersfrom(void){
@@ -513,11 +799,71 @@ void draw_digit(uint8_t digit){
 	}
 }
 
+void draw_top_digit(uint8_t digit){
+	if(digit == 0){
+		draw_top_zero();
+		}else if(digit == 1){
+		draw_top_one();
+		}else if(digit == 2){
+		draw_top_two();
+		}else if(digit == 3){
+		draw_top_three();
+		}else if(digit == 4){
+		draw_top_four();
+		}else if(digit == 5){
+		draw_top_five();
+		}else if(digit == 6){
+		draw_top_six();
+		}else if(digit == 7){
+		draw_top_seven();
+		}else if(digit == 8){
+		draw_top_eight();
+		}else if(digit == 9){
+		draw_top_nine();
+	}
+}
+
+void draw_bottom_digit(uint8_t digit){
+	if(digit == 0){
+		draw_bottom_zero();
+		}else if(digit == 1){
+		draw_bottom_one();
+		}else if(digit == 2){
+		draw_bottom_two();
+		}else if(digit == 3){
+		draw_bottom_three();
+		}else if(digit == 4){
+		draw_bottom_four();
+		}else if(digit == 5){
+		draw_bottom_five();
+		}else if(digit == 6){
+		draw_bottom_six();
+		}else if(digit == 7){
+		draw_bottom_seven();
+		}else if(digit == 8){
+		draw_bottom_eight();
+		}else if(digit == 9){
+		draw_bottom_nine();
+	}
+}
+
 //void displaytimeunit(uint8_t timeunit); displays time unit
 void displaytimeunit(uint8_t timeunit){
 uint8_t timeunit_now = timeunit; //stores volatile into timeunit_now which will be manipulated for display
 draw_digit((timeunit_now - (timeunit_now % 10))/10);
 draw_digit(timeunit_now % 10);
+}
+
+void display_top_timeunit(uint8_t timeunit){
+	uint8_t timeunit_now = timeunit; //stores volatile into timeunit_now which will be manipulated for display
+	draw_top_digit((timeunit_now - (timeunit_now % 10))/10);
+	draw_top_digit(timeunit_now % 10);
+}
+
+void display_bottom_timeunit(uint8_t timeunit){
+	uint8_t timeunit_now = timeunit; //stores volatile into timeunit_now which will be manipulated for display
+	draw_bottom_digit((timeunit_now - (timeunit_now % 10))/10);
+	draw_bottom_digit(timeunit_now % 10);
 }
 
 //void draw_letter(index); draws a letter corresponding to the index. 0=A, 1=B, etc. etc. 25=Z
@@ -1548,7 +1894,24 @@ void refresh_screen(void){
 		
 		if(j==4){
 			if((displayvar == 0) && (hours_until_next_MEHC_order > 0)){
-				draw_blankline();
+				display_top_timeunit(hours);
+				send_data(0x00);
+				send_data(0x00);
+				send_data(0x00);
+				send_data(0x80);
+				send_data(0x80);
+				send_data(0x80);
+				send_data(0x00);
+				send_data(0x00);
+				send_data(0x00);
+				send_data(0x80);
+				send_data(0x80);
+				send_data(0x80);
+				display_top_timeunit(minutes);
+				send_data(0x00);
+				send_data(0x00);
+				send_data(0x00);
+				send_data(0x00);
 			}
 			if((displayvar == 0) && (hours_until_next_MEHC_order == 0)){
 				draw_machineempire();
@@ -1608,7 +1971,24 @@ void refresh_screen(void){
 		if(j==5){
 			
 			if((displayvar == 0) && (hours_until_next_MEHC_order > 0)){
-				draw_blankline();
+				display_bottom_timeunit(hours);
+				send_data(0x00);
+				send_data(0x00);
+				send_data(0x00);
+				send_data(0xFF);
+				send_data(0xFF);
+				send_data(0xFF);
+				send_data(0x1C);
+				send_data(0x1C);
+				send_data(0x1C);
+				send_data(0xFF);
+				send_data(0xFF);
+				send_data(0xFF);
+				display_bottom_timeunit(minutes);
+				send_data(0x00);
+				send_data(0x00);
+				send_data(0x00);
+				send_data(0x00);
 			}
 			if((displayvar == 0) && (hours_until_next_MEHC_order == 0)){
 				draw_highcommand();
@@ -1729,7 +2109,7 @@ ISR(TIMER2_OVF_vect){
 		
 		///*uncommenting this will set the timer to actually delay the orders
 		if(order_array_index >= 7){
-			hours_until_next_MEHC_order = current_MEHC_order[6];			
+			hours_until_next_MEHC_order = (current_MEHC_order[6] % 128);			
 		}
 		//uncommenting the above snippet sets timer to actually delay orders*/
 		
