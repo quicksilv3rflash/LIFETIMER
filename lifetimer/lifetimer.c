@@ -30,9 +30,9 @@ Sleeping with POWER DOWN mode: 0.3mA (Asynchronous timer no longer works)
 //the percentage is calculated by (2,500,000,000 - #of seconds since january 4th 1991)/2,500,000,000
 //the percentage will be in the form: AB.CDEFGHIJ, and the J digit will be decremented every 1/4 second.
 volatile uint8_t AB = 67;
-volatile uint8_t CD = 99;
-volatile uint8_t EF = 52;
-volatile uint8_t GH = 90;
+volatile uint8_t CD = 93;
+volatile uint8_t EF = 17;
+volatile uint8_t GH = 36;
 volatile uint8_t IJ = 00;
 
 volatile uint8_t displayvar = 0; 
@@ -52,9 +52,9 @@ volatile uint8_t previous_MEHC_order[] = {0,0,0,0,0,0,0,0,0,0};
 volatile uint8_t number_of_frames_displayed = 0;
 volatile uint8_t num_overflows = 0;
 volatile uint8_t seconds = 00;
-volatile uint8_t minutes = 53;
-volatile uint8_t hours = 14;
-volatile uint8_t days = 12;
+volatile uint8_t minutes = 13;
+volatile uint8_t hours = 00;
+volatile uint8_t days = 31;
 volatile uint8_t months = 5;
 volatile uint8_t years = 16; //rofl Y2K bug again
 
@@ -1731,7 +1731,7 @@ void draw_toxx(uint8_t current_or_past){//1=current, 2=past
 		if((current_MEHC_order[2] % 8) == 6){
 			//se
 			draw_letter(18);
-			draw_letter(3);
+			draw_letter(4);
 		}
 		if((current_MEHC_order[2] % 8) == 7){
 			//sw

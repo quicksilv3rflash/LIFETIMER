@@ -540,7 +540,7 @@ END GROUP
  *(.fini0)
                 0x00002f96                _etext = .
 
-.data           0x00800100      0x10a load address 0x00002f96
+.data           0x00800100      0x108 load address 0x00002f96
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -556,75 +556,74 @@ END GROUP
                 0x00800201                months
  .data.days     0x00800202        0x1 lifetimer.o
                 0x00800202                days
- .data.hours    0x00800203        0x1 lifetimer.o
-                0x00800203                hours
- .data.minutes  0x00800204        0x1 lifetimer.o
-                0x00800204                minutes
- .data.GH       0x00800205        0x1 lifetimer.o
-                0x00800205                GH
- .data.EF       0x00800206        0x1 lifetimer.o
-                0x00800206                EF
- .data.CD       0x00800207        0x1 lifetimer.o
-                0x00800207                CD
- .data.AB       0x00800208        0x1 lifetimer.o
-                0x00800208                AB
+ .data.minutes  0x00800203        0x1 lifetimer.o
+                0x00800203                minutes
+ .data.GH       0x00800204        0x1 lifetimer.o
+                0x00800204                GH
+ .data.EF       0x00800205        0x1 lifetimer.o
+                0x00800205                EF
+ .data.CD       0x00800206        0x1 lifetimer.o
+                0x00800206                CD
+ .data.AB       0x00800207        0x1 lifetimer.o
+                0x00800207                AB
  *(.rodata)
  *(.rodata*)
  *(.gnu.linkonce.d*)
-                0x0080020a                . = ALIGN (0x2)
- *fill*         0x00800209        0x1 
-                0x0080020a                _edata = .
-                0x0080020a                PROVIDE (__data_end, .)
+                0x00800208                . = ALIGN (0x2)
+                0x00800208                _edata = .
+                0x00800208                PROVIDE (__data_end, .)
 
-.bss            0x0080020a       0x1e
-                0x0080020a                PROVIDE (__bss_start, .)
+.bss            0x00800208       0x1f
+                0x00800208                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.seconds   0x0080020a        0x1 lifetimer.o
-                0x0080020a                seconds
+ .bss.hours     0x00800208        0x1 lifetimer.o
+                0x00800208                hours
+ .bss.seconds   0x00800209        0x1 lifetimer.o
+                0x00800209                seconds
  .bss.num_overflows
-                0x0080020b        0x1 lifetimer.o
-                0x0080020b                num_overflows
+                0x0080020a        0x1 lifetimer.o
+                0x0080020a                num_overflows
  .bss.number_of_frames_displayed
-                0x0080020c        0x1 lifetimer.o
-                0x0080020c                number_of_frames_displayed
+                0x0080020b        0x1 lifetimer.o
+                0x0080020b                number_of_frames_displayed
  .bss.previous_MEHC_order
-                0x0080020d        0xa lifetimer.o
-                0x0080020d                previous_MEHC_order
+                0x0080020c        0xa lifetimer.o
+                0x0080020c                previous_MEHC_order
  .bss.current_MEHC_order
-                0x00800217        0xa lifetimer.o
-                0x00800217                current_MEHC_order
+                0x00800216        0xa lifetimer.o
+                0x00800216                current_MEHC_order
  .bss.hours_until_next_MEHC_order
-                0x00800221        0x1 lifetimer.o
-                0x00800221                hours_until_next_MEHC_order
+                0x00800220        0x1 lifetimer.o
+                0x00800220                hours_until_next_MEHC_order
  .bss.order_array_index
-                0x00800222        0x1 lifetimer.o
-                0x00800222                order_array_index
+                0x00800221        0x1 lifetimer.o
+                0x00800221                order_array_index
  .bss.rand_int_loaded
-                0x00800223        0x1 lifetimer.o
-                0x00800223                rand_int_loaded
+                0x00800222        0x1 lifetimer.o
+                0x00800222                rand_int_loaded
  .bss.rand_int_locked
-                0x00800224        0x1 lifetimer.o
-                0x00800224                rand_int_locked
+                0x00800223        0x1 lifetimer.o
+                0x00800223                rand_int_locked
  .bss.order_entry_mode_flag
-                0x00800225        0x1 lifetimer.o
-                0x00800225                order_entry_mode_flag
+                0x00800224        0x1 lifetimer.o
+                0x00800224                order_entry_mode_flag
  .bss.displayvar
-                0x00800226        0x1 lifetimer.o
-                0x00800226                displayvar
- .bss.IJ        0x00800227        0x1 lifetimer.o
-                0x00800227                IJ
+                0x00800225        0x1 lifetimer.o
+                0x00800225                displayvar
+ .bss.IJ        0x00800226        0x1 lifetimer.o
+                0x00800226                IJ
  *(COMMON)
-                0x00800228                PROVIDE (__bss_end, .)
+                0x00800227                PROVIDE (__bss_end, .)
                 0x00002f96                __data_load_start = LOADADDR (.data)
-                0x000030a0                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000309e                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800228        0x0
-                0x00800228                PROVIDE (__noinit_start, .)
+.noinit         0x00800227        0x0
+                0x00800227                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800228                PROVIDE (__noinit_end, .)
-                0x00800228                _end = .
-                0x00800228                PROVIDE (__heap_start, .)
+                0x00800227                PROVIDE (__noinit_end, .)
+                0x00800227                _end = .
+                0x00800227                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)

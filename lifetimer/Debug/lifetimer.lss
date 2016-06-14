@@ -3,21 +3,21 @@ lifetimer.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         0000010a  00800100  00002f96  0000302a  2**0
+  0 .data         00000108  00800100  00002f96  0000302a  2**0
                   CONTENTS, ALLOC, LOAD, DATA
   1 .text         00002f96  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          0000001e  0080020a  0080020a  00003134  2**0
+  2 .bss          0000001f  00800208  00800208  00003132  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00003134  2**0
+  3 .comment      00000030  00000000  00000000  00003132  2**0
                   CONTENTS, READONLY
-  4 .debug_aranges 00000220  00000000  00000000  00003164  2**0
+  4 .debug_aranges 00000220  00000000  00000000  00003162  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   000070cd  00000000  00000000  00003384  2**0
+  5 .debug_info   000070cd  00000000  00000000  00003382  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000023a  00000000  00000000  0000a451  2**0
+  6 .debug_abbrev 0000023a  00000000  00000000  0000a44f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000e81  00000000  00000000  0000a68b  2**0
+  7 .debug_line   00000e81  00000000  00000000  0000a689  2**0
                   CONTENTS, READONLY, DEBUGGING
   8 .debug_frame  0000059c  00000000  00000000  0000b50c  2**2
                   CONTENTS, READONLY, DEBUGGING
@@ -75,13 +75,13 @@ Disassembly of section .text:
       7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
       80:	05 90       	lpm	r0, Z+
       82:	0d 92       	st	X+, r0
-      84:	aa 30       	cpi	r26, 0x0A	; 10
+      84:	a8 30       	cpi	r26, 0x08	; 8
       86:	b1 07       	cpc	r27, r17
       88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
 
 0000008a <__do_clear_bss>:
       8a:	22 e0       	ldi	r18, 0x02	; 2
-      8c:	aa e0       	ldi	r26, 0x0A	; 10
+      8c:	a8 e0       	ldi	r26, 0x08	; 8
       8e:	b2 e0       	ldi	r27, 0x02	; 2
       90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
 
@@ -89,7 +89,7 @@ Disassembly of section .text:
       92:	1d 92       	st	X+, r1
 
 00000094 <.do_clear_bss_start>:
-      94:	a8 32       	cpi	r26, 0x28	; 40
+      94:	a7 32       	cpi	r26, 0x27	; 39
       96:	b2 07       	cpc	r27, r18
       98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
       9a:	0e 94 18 17 	call	0x2e30	; 0x2e30 <main>
@@ -4152,10 +4152,10 @@ void draw_deg_n(uint8_t current_or_past){//1=current, 2=past, uses MEHC_order[2]
     1c38:	c1 30       	cpi	r28, 0x01	; 1
     1c3a:	31 f4       	brne	.+12     	; 0x1c48 <draw_deg_n+0x64>
 		nucleus_index = (current_MEHC_order[2] % 32);
-    1c3c:	10 91 19 02 	lds	r17, 0x0219
+    1c3c:	10 91 18 02 	lds	r17, 0x0218
     1c40:	1f 71       	andi	r17, 0x1F	; 31
 		variance = current_MEHC_order[3];		
-    1c42:	80 91 1a 02 	lds	r24, 0x021A
+    1c42:	80 91 19 02 	lds	r24, 0x0219
     1c46:	08 c0       	rjmp	.+16     	; 0x1c58 <draw_deg_n+0x74>
 	}
 	if(current_or_past == 2){//if past
@@ -4163,10 +4163,10 @@ void draw_deg_n(uint8_t current_or_past){//1=current, 2=past, uses MEHC_order[2]
     1c4a:	09 f0       	breq	.+2      	; 0x1c4e <draw_deg_n+0x6a>
     1c4c:	4f c0       	rjmp	.+158    	; 0x1cec <draw_deg_n+0x108>
 		nucleus_index = (previous_MEHC_order[2] % 32);
-    1c4e:	10 91 0f 02 	lds	r17, 0x020F
+    1c4e:	10 91 0e 02 	lds	r17, 0x020E
     1c52:	1f 71       	andi	r17, 0x1F	; 31
 		variance = previous_MEHC_order[3];	
-    1c54:	80 91 10 02 	lds	r24, 0x0210
+    1c54:	80 91 0f 02 	lds	r24, 0x020F
 	}
 	
 		//modifiable display data goes here
@@ -4497,10 +4497,10 @@ void draw_deg_e(uint8_t current_or_past){//1=current, 2=past, uses MEHC_order[2]
     1e9c:	c1 30       	cpi	r28, 0x01	; 1
     1e9e:	31 f4       	brne	.+12     	; 0x1eac <draw_deg_e+0x64>
 		nucleus_index = (current_MEHC_order[2] % 32);
-    1ea0:	10 91 19 02 	lds	r17, 0x0219
+    1ea0:	10 91 18 02 	lds	r17, 0x0218
     1ea4:	1f 71       	andi	r17, 0x1F	; 31
 		variance = current_MEHC_order[4];		
-    1ea6:	80 91 1b 02 	lds	r24, 0x021B
+    1ea6:	80 91 1a 02 	lds	r24, 0x021A
     1eaa:	08 c0       	rjmp	.+16     	; 0x1ebc <draw_deg_e+0x74>
 	}
 	if(current_or_past == 2){//if past
@@ -4508,10 +4508,10 @@ void draw_deg_e(uint8_t current_or_past){//1=current, 2=past, uses MEHC_order[2]
     1eae:	09 f0       	breq	.+2      	; 0x1eb2 <draw_deg_e+0x6a>
     1eb0:	4f c0       	rjmp	.+158    	; 0x1f50 <draw_deg_e+0x108>
 		nucleus_index = (previous_MEHC_order[2] % 32);
-    1eb2:	10 91 0f 02 	lds	r17, 0x020F
+    1eb2:	10 91 0e 02 	lds	r17, 0x020E
     1eb6:	1f 71       	andi	r17, 0x1F	; 31
 		variance = previous_MEHC_order[4];		
-    1eb8:	80 91 11 02 	lds	r24, 0x0211
+    1eb8:	80 91 10 02 	lds	r24, 0x0210
 	}
 	
 		//modifiable display data goes here
@@ -4857,7 +4857,7 @@ void draw_getxxxx(uint8_t current_or_past){ //1=current, 2=past
     2108:	09 f0       	breq	.+2      	; 0x210c <draw_getxxxx+0x60>
     210a:	52 c0       	rjmp	.+164    	; 0x21b0 <draw_getxxxx+0x104>
 		draw_letter(current_MEHC_order[2] % 26);
-    210c:	80 91 19 02 	lds	r24, 0x0219
+    210c:	80 91 18 02 	lds	r24, 0x0218
     2110:	df e4       	ldi	r29, 0x4F	; 79
     2112:	8d 9f       	mul	r24, r29
     2114:	91 2d       	mov	r25, r1
@@ -4880,7 +4880,7 @@ void draw_getxxxx(uint8_t current_or_past){ //1=current, 2=past
     2136:	80 e0       	ldi	r24, 0x00	; 0
     2138:	0e 94 66 00 	call	0xcc	; 0xcc <send_data>
 		draw_letter(current_MEHC_order[3] % 26);
-    213c:	80 91 1a 02 	lds	r24, 0x021A
+    213c:	80 91 19 02 	lds	r24, 0x0219
     2140:	8d 9f       	mul	r24, r29
     2142:	91 2d       	mov	r25, r1
     2144:	11 24       	eor	r1, r1
@@ -4901,7 +4901,7 @@ void draw_getxxxx(uint8_t current_or_past){ //1=current, 2=past
     2162:	80 e0       	ldi	r24, 0x00	; 0
     2164:	0e 94 66 00 	call	0xcc	; 0xcc <send_data>
 		draw_letter(current_MEHC_order[4] % 26);
-    2168:	80 91 1b 02 	lds	r24, 0x021B
+    2168:	80 91 1a 02 	lds	r24, 0x021A
     216c:	8d 9f       	mul	r24, r29
     216e:	91 2d       	mov	r25, r1
     2170:	11 24       	eor	r1, r1
@@ -4922,7 +4922,7 @@ void draw_getxxxx(uint8_t current_or_past){ //1=current, 2=past
     218e:	80 e0       	ldi	r24, 0x00	; 0
     2190:	0e 94 66 00 	call	0xcc	; 0xcc <send_data>
 		draw_letter(current_MEHC_order[5] % 26);
-    2194:	80 91 1c 02 	lds	r24, 0x021C
+    2194:	80 91 1b 02 	lds	r24, 0x021B
     2198:	8d 9f       	mul	r24, r29
     219a:	d1 2d       	mov	r29, r1
     219c:	11 24       	eor	r1, r1
@@ -4940,7 +4940,7 @@ void draw_getxxxx(uint8_t current_or_past){ //1=current, 2=past
     21b2:	09 f0       	breq	.+2      	; 0x21b6 <draw_getxxxx+0x10a>
     21b4:	51 c0       	rjmp	.+162    	; 0x2258 <draw_getxxxx+0x1ac>
 		draw_letter(previous_MEHC_order[2] % 26);
-    21b6:	80 91 0f 02 	lds	r24, 0x020F
+    21b6:	80 91 0e 02 	lds	r24, 0x020E
     21ba:	df e4       	ldi	r29, 0x4F	; 79
     21bc:	8d 9f       	mul	r24, r29
     21be:	91 2d       	mov	r25, r1
@@ -4963,7 +4963,7 @@ void draw_getxxxx(uint8_t current_or_past){ //1=current, 2=past
     21e0:	80 e0       	ldi	r24, 0x00	; 0
     21e2:	0e 94 66 00 	call	0xcc	; 0xcc <send_data>
 		draw_letter(previous_MEHC_order[3] % 26);
-    21e6:	80 91 10 02 	lds	r24, 0x0210
+    21e6:	80 91 0f 02 	lds	r24, 0x020F
     21ea:	8d 9f       	mul	r24, r29
     21ec:	91 2d       	mov	r25, r1
     21ee:	11 24       	eor	r1, r1
@@ -4984,7 +4984,7 @@ void draw_getxxxx(uint8_t current_or_past){ //1=current, 2=past
     220c:	80 e0       	ldi	r24, 0x00	; 0
     220e:	0e 94 66 00 	call	0xcc	; 0xcc <send_data>
 		draw_letter(previous_MEHC_order[4] % 26);
-    2212:	80 91 11 02 	lds	r24, 0x0211
+    2212:	80 91 10 02 	lds	r24, 0x0210
     2216:	8d 9f       	mul	r24, r29
     2218:	91 2d       	mov	r25, r1
     221a:	11 24       	eor	r1, r1
@@ -5005,7 +5005,7 @@ void draw_getxxxx(uint8_t current_or_past){ //1=current, 2=past
     2238:	80 e0       	ldi	r24, 0x00	; 0
     223a:	0e 94 66 00 	call	0xcc	; 0xcc <send_data>
 		draw_letter(previous_MEHC_order[5] % 26);
-    223e:	80 91 12 02 	lds	r24, 0x0212
+    223e:	80 91 11 02 	lds	r24, 0x0211
     2242:	8d 9f       	mul	r24, r29
     2244:	d1 2d       	mov	r29, r1
     2246:	11 24       	eor	r1, r1
@@ -5280,7 +5280,7 @@ void draw_toxx(uint8_t current_or_past){//1=current, 2=past
     23fa:	65 c0       	rjmp	.+202    	; 0x24c6 <draw_toxx+0x118>
 		//N S E W NE NW SE SW go here
 		if((current_MEHC_order[2] % 8) == 0){
-    23fc:	80 91 19 02 	lds	r24, 0x0219
+    23fc:	80 91 18 02 	lds	r24, 0x0218
     2400:	87 70       	andi	r24, 0x07	; 7
     2402:	49 f4       	brne	.+18     	; 0x2416 <draw_toxx+0x68>
 			//n
@@ -5304,7 +5304,7 @@ void draw_toxx(uint8_t current_or_past){//1=current, 2=past
 			}
 		}
 		if((current_MEHC_order[2] % 8) == 1){
-    2416:	80 91 19 02 	lds	r24, 0x0219
+    2416:	80 91 18 02 	lds	r24, 0x0218
     241a:	87 70       	andi	r24, 0x07	; 7
     241c:	81 30       	cpi	r24, 0x01	; 1
     241e:	49 f4       	brne	.+18     	; 0x2432 <draw_toxx+0x84>
@@ -5329,7 +5329,7 @@ void draw_toxx(uint8_t current_or_past){//1=current, 2=past
 			}
 		}
 		if((current_MEHC_order[2] % 8) == 2){
-    2432:	80 91 19 02 	lds	r24, 0x0219
+    2432:	80 91 18 02 	lds	r24, 0x0218
     2436:	87 70       	andi	r24, 0x07	; 7
     2438:	82 30       	cpi	r24, 0x02	; 2
     243a:	49 f4       	brne	.+18     	; 0x244e <draw_toxx+0xa0>
@@ -5354,7 +5354,7 @@ void draw_toxx(uint8_t current_or_past){//1=current, 2=past
 			}
 		}
 		if((current_MEHC_order[2] % 8) == 3){
-    244e:	80 91 19 02 	lds	r24, 0x0219
+    244e:	80 91 18 02 	lds	r24, 0x0218
     2452:	87 70       	andi	r24, 0x07	; 7
     2454:	83 30       	cpi	r24, 0x03	; 3
     2456:	49 f4       	brne	.+18     	; 0x246a <draw_toxx+0xbc>
@@ -5379,7 +5379,7 @@ void draw_toxx(uint8_t current_or_past){//1=current, 2=past
 			}
 		}
 		if((current_MEHC_order[2] % 8) == 4){
-    246a:	80 91 19 02 	lds	r24, 0x0219
+    246a:	80 91 18 02 	lds	r24, 0x0218
     246e:	87 70       	andi	r24, 0x07	; 7
     2470:	84 30       	cpi	r24, 0x04	; 4
     2472:	31 f4       	brne	.+12     	; 0x2480 <draw_toxx+0xd2>
@@ -5392,7 +5392,7 @@ void draw_toxx(uint8_t current_or_past){//1=current, 2=past
     247c:	0e 94 00 08 	call	0x1000	; 0x1000 <draw_letter>
 		}
 		if((current_MEHC_order[2] % 8) == 5){
-    2480:	80 91 19 02 	lds	r24, 0x0219
+    2480:	80 91 18 02 	lds	r24, 0x0218
     2484:	87 70       	andi	r24, 0x07	; 7
     2486:	85 30       	cpi	r24, 0x05	; 5
     2488:	31 f4       	brne	.+12     	; 0x2496 <draw_toxx+0xe8>
@@ -5405,7 +5405,7 @@ void draw_toxx(uint8_t current_or_past){//1=current, 2=past
     2492:	0e 94 00 08 	call	0x1000	; 0x1000 <draw_letter>
 		}
 		if((current_MEHC_order[2] % 8) == 6){
-    2496:	80 91 19 02 	lds	r24, 0x0219
+    2496:	80 91 18 02 	lds	r24, 0x0218
     249a:	87 70       	andi	r24, 0x07	; 7
     249c:	86 30       	cpi	r24, 0x06	; 6
     249e:	31 f4       	brne	.+12     	; 0x24ac <draw_toxx+0xfe>
@@ -5413,12 +5413,12 @@ void draw_toxx(uint8_t current_or_past){//1=current, 2=past
 			draw_letter(18);
     24a0:	82 e1       	ldi	r24, 0x12	; 18
     24a2:	0e 94 00 08 	call	0x1000	; 0x1000 <draw_letter>
-			draw_letter(3);
-    24a6:	83 e0       	ldi	r24, 0x03	; 3
+			draw_letter(4);
+    24a6:	84 e0       	ldi	r24, 0x04	; 4
     24a8:	0e 94 00 08 	call	0x1000	; 0x1000 <draw_letter>
 		}
 		if((current_MEHC_order[2] % 8) == 7){
-    24ac:	80 91 19 02 	lds	r24, 0x0219
+    24ac:	80 91 18 02 	lds	r24, 0x0218
     24b0:	87 70       	andi	r24, 0x07	; 7
     24b2:	87 30       	cpi	r24, 0x07	; 7
     24b4:	09 f0       	breq	.+2      	; 0x24b8 <draw_toxx+0x10a>
@@ -5440,7 +5440,7 @@ void draw_toxx(uint8_t current_or_past){//1=current, 2=past
     24ca:	6a c0       	rjmp	.+212    	; 0x25a0 <draw_toxx+0x1f2>
 		//N S E W NE NW SE SW go here
 		if((previous_MEHC_order[2] % 8) == 0){
-    24cc:	80 91 0f 02 	lds	r24, 0x020F
+    24cc:	80 91 0e 02 	lds	r24, 0x020E
     24d0:	87 70       	andi	r24, 0x07	; 7
     24d2:	49 f4       	brne	.+18     	; 0x24e6 <draw_toxx+0x138>
 			//n
@@ -5464,7 +5464,7 @@ void draw_toxx(uint8_t current_or_past){//1=current, 2=past
 			}
 		}
 		if((previous_MEHC_order[2] % 8) == 1){
-    24e6:	80 91 0f 02 	lds	r24, 0x020F
+    24e6:	80 91 0e 02 	lds	r24, 0x020E
     24ea:	87 70       	andi	r24, 0x07	; 7
     24ec:	81 30       	cpi	r24, 0x01	; 1
     24ee:	49 f4       	brne	.+18     	; 0x2502 <draw_toxx+0x154>
@@ -5489,7 +5489,7 @@ void draw_toxx(uint8_t current_or_past){//1=current, 2=past
 			}
 		}
 		if((previous_MEHC_order[2] % 8) == 2){
-    2502:	80 91 0f 02 	lds	r24, 0x020F
+    2502:	80 91 0e 02 	lds	r24, 0x020E
     2506:	87 70       	andi	r24, 0x07	; 7
     2508:	82 30       	cpi	r24, 0x02	; 2
     250a:	49 f4       	brne	.+18     	; 0x251e <draw_toxx+0x170>
@@ -5514,7 +5514,7 @@ void draw_toxx(uint8_t current_or_past){//1=current, 2=past
 			}
 		}
 		if((previous_MEHC_order[2] % 8) == 3){
-    251e:	80 91 0f 02 	lds	r24, 0x020F
+    251e:	80 91 0e 02 	lds	r24, 0x020E
     2522:	87 70       	andi	r24, 0x07	; 7
     2524:	83 30       	cpi	r24, 0x03	; 3
     2526:	49 f4       	brne	.+18     	; 0x253a <draw_toxx+0x18c>
@@ -5539,7 +5539,7 @@ void draw_toxx(uint8_t current_or_past){//1=current, 2=past
 			}
 		}
 		if((previous_MEHC_order[2] % 8) == 4){
-    253a:	80 91 0f 02 	lds	r24, 0x020F
+    253a:	80 91 0e 02 	lds	r24, 0x020E
     253e:	87 70       	andi	r24, 0x07	; 7
     2540:	84 30       	cpi	r24, 0x04	; 4
     2542:	31 f4       	brne	.+12     	; 0x2550 <draw_toxx+0x1a2>
@@ -5552,7 +5552,7 @@ void draw_toxx(uint8_t current_or_past){//1=current, 2=past
     254c:	0e 94 00 08 	call	0x1000	; 0x1000 <draw_letter>
 		}
 		if((previous_MEHC_order[2] % 8) == 5){
-    2550:	80 91 0f 02 	lds	r24, 0x020F
+    2550:	80 91 0e 02 	lds	r24, 0x020E
     2554:	87 70       	andi	r24, 0x07	; 7
     2556:	85 30       	cpi	r24, 0x05	; 5
     2558:	31 f4       	brne	.+12     	; 0x2566 <draw_toxx+0x1b8>
@@ -5565,7 +5565,7 @@ void draw_toxx(uint8_t current_or_past){//1=current, 2=past
     2562:	0e 94 00 08 	call	0x1000	; 0x1000 <draw_letter>
 		}
 		if((previous_MEHC_order[2] % 8) == 6){
-    2566:	80 91 0f 02 	lds	r24, 0x020F
+    2566:	80 91 0e 02 	lds	r24, 0x020E
     256a:	87 70       	andi	r24, 0x07	; 7
     256c:	86 30       	cpi	r24, 0x06	; 6
     256e:	31 f4       	brne	.+12     	; 0x257c <draw_toxx+0x1ce>
@@ -5578,7 +5578,7 @@ void draw_toxx(uint8_t current_or_past){//1=current, 2=past
     2578:	0e 94 00 08 	call	0x1000	; 0x1000 <draw_letter>
 		}
 		if((previous_MEHC_order[2] % 8) == 7){
-    257c:	80 91 0f 02 	lds	r24, 0x020F
+    257c:	80 91 0e 02 	lds	r24, 0x020E
     2580:	87 70       	andi	r24, 0x07	; 7
     2582:	87 30       	cpi	r24, 0x07	; 7
     2584:	69 f4       	brne	.+26     	; 0x25a0 <draw_toxx+0x1f2>
@@ -5646,7 +5646,7 @@ void refresh_screen(void){
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 7)){
     25b6:	0f 2e       	mov	r0, r31
-    25b8:	fd e0       	ldi	r31, 0x0D	; 13
+    25b8:	fc e0       	ldi	r31, 0x0C	; 12
     25ba:	ef 2e       	mov	r14, r31
     25bc:	f2 e0       	ldi	r31, 0x02	; 2
     25be:	ff 2e       	mov	r15, r31
@@ -5657,7 +5657,7 @@ void refresh_screen(void){
 				draw_getxxxx(1); //1=current, 2=past | oh boy I get to learn about feeding pointers to arrays into functions!!! ^.^ (BUT NOT TODAY JUST MORE KLUDGES)
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 7)){
-    25c2:	c7 e1       	ldi	r28, 0x17	; 23
+    25c2:	c6 e1       	ldi	r28, 0x16	; 22
     25c4:	d2 e0       	ldi	r29, 0x02	; 2
 
 //void refresh_screen(void); refreshes the screen
@@ -5685,21 +5685,21 @@ void refresh_screen(void){
     25da:	11 11       	cpse	r17, r1
     25dc:	31 c0       	rjmp	.+98     	; 0x2640 <refresh_screen+0x96>
 			displaytimeunit(AB);
-    25de:	80 91 08 02 	lds	r24, 0x0208
+    25de:	80 91 07 02 	lds	r24, 0x0207
     25e2:	0e 94 9d 07 	call	0xf3a	; 0xf3a <displaytimeunit>
 			draw_period();
     25e6:	0e 94 ed 00 	call	0x1da	; 0x1da <draw_period>
 			displaytimeunit(CD);
-    25ea:	80 91 07 02 	lds	r24, 0x0207
+    25ea:	80 91 06 02 	lds	r24, 0x0206
     25ee:	0e 94 9d 07 	call	0xf3a	; 0xf3a <displaytimeunit>
 			displaytimeunit(EF);
-    25f2:	80 91 06 02 	lds	r24, 0x0206
+    25f2:	80 91 05 02 	lds	r24, 0x0205
     25f6:	0e 94 9d 07 	call	0xf3a	; 0xf3a <displaytimeunit>
 			displaytimeunit(GH);
-    25fa:	80 91 05 02 	lds	r24, 0x0205
+    25fa:	80 91 04 02 	lds	r24, 0x0204
     25fe:	0e 94 9d 07 	call	0xf3a	; 0xf3a <displaytimeunit>
 			displaytimeunit(IJ);	
-    2602:	80 91 27 02 	lds	r24, 0x0227
+    2602:	80 91 26 02 	lds	r24, 0x0226
     2606:	0e 94 9d 07 	call	0xf3a	; 0xf3a <displaytimeunit>
 			
 			for(uint8_t i=0;i<2;i++){
@@ -5797,7 +5797,7 @@ void refresh_screen(void){
     26b0:	80 e0       	ldi	r24, 0x00	; 0
     26b2:	0e 94 66 00 	call	0xcc	; 0xcc <send_data>
 			displaytimeunit(hours);
-    26b6:	80 91 03 02 	lds	r24, 0x0203
+    26b6:	80 91 08 02 	lds	r24, 0x0208
     26ba:	0e 94 9d 07 	call	0xf3a	; 0xf3a <displaytimeunit>
 			send_data(0x00);
     26be:	80 e0       	ldi	r24, 0x00	; 0
@@ -5812,7 +5812,7 @@ void refresh_screen(void){
     26d0:	88 e3       	ldi	r24, 0x38	; 56
     26d2:	0e 94 66 00 	call	0xcc	; 0xcc <send_data>
 			displaytimeunit(minutes);
-    26d6:	80 91 04 02 	lds	r24, 0x0204
+    26d6:	80 91 03 02 	lds	r24, 0x0203
     26da:	0e 94 9d 07 	call	0xf3a	; 0xf3a <displaytimeunit>
     26de:	2a c1       	rjmp	.+596    	; 0x2934 <refresh_screen+0x38a>
 		}		
@@ -5820,26 +5820,26 @@ void refresh_screen(void){
     26e0:	13 30       	cpi	r17, 0x03	; 3
     26e2:	e1 f5       	brne	.+120    	; 0x275c <refresh_screen+0x1b2>
 			if((displayvar == 0) && (hours_until_next_MEHC_order > 0)){
-    26e4:	80 91 26 02 	lds	r24, 0x0226
+    26e4:	80 91 25 02 	lds	r24, 0x0225
     26e8:	81 11       	cpse	r24, r1
     26ea:	05 c0       	rjmp	.+10     	; 0x26f6 <refresh_screen+0x14c>
-    26ec:	80 91 21 02 	lds	r24, 0x0221
+    26ec:	80 91 20 02 	lds	r24, 0x0220
     26f0:	81 11       	cpse	r24, r1
 				draw_blankline();
     26f2:	0e 94 22 0a 	call	0x1444	; 0x1444 <draw_blankline>
 			}
 			if((displayvar == 0) && (hours_until_next_MEHC_order == 0)){
-    26f6:	80 91 26 02 	lds	r24, 0x0226
+    26f6:	80 91 25 02 	lds	r24, 0x0225
     26fa:	81 11       	cpse	r24, r1
     26fc:	06 c0       	rjmp	.+12     	; 0x270a <refresh_screen+0x160>
-    26fe:	80 91 21 02 	lds	r24, 0x0221
+    26fe:	80 91 20 02 	lds	r24, 0x0220
     2702:	81 11       	cpse	r24, r1
     2704:	02 c0       	rjmp	.+4      	; 0x270a <refresh_screen+0x160>
 				draw_newordersfrom();
     2706:	0e 94 03 04 	call	0x806	; 0x806 <draw_newordersfrom>
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] != 5)){
-    270a:	80 91 26 02 	lds	r24, 0x0226
+    270a:	80 91 25 02 	lds	r24, 0x0225
     270e:	81 30       	cpi	r24, 0x01	; 1
     2710:	29 f4       	brne	.+10     	; 0x271c <refresh_screen+0x172>
     2712:	88 81       	ld	r24, Y
@@ -5849,7 +5849,7 @@ void refresh_screen(void){
     2718:	0e 94 22 0a 	call	0x1444	; 0x1444 <draw_blankline>
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] != 5)){
-    271c:	80 91 26 02 	lds	r24, 0x0226
+    271c:	80 91 25 02 	lds	r24, 0x0225
     2720:	82 30       	cpi	r24, 0x02	; 2
     2722:	31 f4       	brne	.+12     	; 0x2730 <refresh_screen+0x186>
     2724:	f7 01       	movw	r30, r14
@@ -5860,7 +5860,7 @@ void refresh_screen(void){
     272c:	0e 94 22 0a 	call	0x1444	; 0x1444 <draw_blankline>
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 5)){
-    2730:	80 91 26 02 	lds	r24, 0x0226
+    2730:	80 91 25 02 	lds	r24, 0x0225
     2734:	81 30       	cpi	r24, 0x01	; 1
     2736:	29 f4       	brne	.+10     	; 0x2742 <refresh_screen+0x198>
     2738:	88 81       	ld	r24, Y
@@ -5870,7 +5870,7 @@ void refresh_screen(void){
     273e:	0e 94 b3 0d 	call	0x1b66	; 0x1b66 <draw_goto>
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 5)){
-    2742:	80 91 26 02 	lds	r24, 0x0226
+    2742:	80 91 25 02 	lds	r24, 0x0225
     2746:	82 30       	cpi	r24, 0x02	; 2
     2748:	09 f0       	breq	.+2      	; 0x274c <refresh_screen+0x1a2>
     274a:	e6 c1       	rjmp	.+972    	; 0x2b18 <refresh_screen+0x56e>
@@ -5890,14 +5890,14 @@ void refresh_screen(void){
     275e:	09 f0       	breq	.+2      	; 0x2762 <refresh_screen+0x1b8>
     2760:	e9 c0       	rjmp	.+466    	; 0x2934 <refresh_screen+0x38a>
 			if((displayvar == 0) && (hours_until_next_MEHC_order > 0)){
-    2762:	80 91 26 02 	lds	r24, 0x0226
+    2762:	80 91 25 02 	lds	r24, 0x0225
     2766:	81 11       	cpse	r24, r1
     2768:	3c c0       	rjmp	.+120    	; 0x27e2 <refresh_screen+0x238>
-    276a:	80 91 21 02 	lds	r24, 0x0221
+    276a:	80 91 20 02 	lds	r24, 0x0220
     276e:	88 23       	and	r24, r24
     2770:	c1 f1       	breq	.+112    	; 0x27e2 <refresh_screen+0x238>
 				display_top_timeunit(hours);
-    2772:	80 91 03 02 	lds	r24, 0x0203
+    2772:	80 91 08 02 	lds	r24, 0x0208
     2776:	0e 94 be 07 	call	0xf7c	; 0xf7c <display_top_timeunit>
 				send_data(0x00);
     277a:	80 e0       	ldi	r24, 0x00	; 0
@@ -5936,7 +5936,7 @@ void refresh_screen(void){
     27bc:	80 e8       	ldi	r24, 0x80	; 128
     27be:	0e 94 66 00 	call	0xcc	; 0xcc <send_data>
 				display_top_timeunit(minutes);
-    27c2:	80 91 04 02 	lds	r24, 0x0204
+    27c2:	80 91 03 02 	lds	r24, 0x0203
     27c6:	0e 94 be 07 	call	0xf7c	; 0xf7c <display_top_timeunit>
 				send_data(0x00);
     27ca:	80 e0       	ldi	r24, 0x00	; 0
@@ -5952,10 +5952,10 @@ void refresh_screen(void){
     27de:	0e 94 66 00 	call	0xcc	; 0xcc <send_data>
 			}
 			if((displayvar == 0) && (hours_until_next_MEHC_order == 0)){
-    27e2:	80 91 26 02 	lds	r24, 0x0226
+    27e2:	80 91 25 02 	lds	r24, 0x0225
     27e6:	81 11       	cpse	r24, r1
     27e8:	06 c0       	rjmp	.+12     	; 0x27f6 <refresh_screen+0x24c>
-    27ea:	80 91 21 02 	lds	r24, 0x0221
+    27ea:	80 91 20 02 	lds	r24, 0x0220
     27ee:	81 11       	cpse	r24, r1
     27f0:	02 c0       	rjmp	.+4      	; 0x27f6 <refresh_screen+0x24c>
 				draw_machineempire();
@@ -5963,7 +5963,7 @@ void refresh_screen(void){
 			}
 			//current order
 			if((displayvar == 1) && (current_MEHC_order[0] == 0)){
-    27f6:	80 91 26 02 	lds	r24, 0x0226
+    27f6:	80 91 25 02 	lds	r24, 0x0225
     27fa:	81 30       	cpi	r24, 0x01	; 1
     27fc:	29 f4       	brne	.+10     	; 0x2808 <refresh_screen+0x25e>
     27fe:	88 81       	ld	r24, Y
@@ -5973,7 +5973,7 @@ void refresh_screen(void){
     2804:	0e 94 2b 0a 	call	0x1456	; 0x1456 <draw_stopandmeditate>
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 1)){
-    2808:	80 91 26 02 	lds	r24, 0x0226
+    2808:	80 91 25 02 	lds	r24, 0x0225
     280c:	81 30       	cpi	r24, 0x01	; 1
     280e:	29 f4       	brne	.+10     	; 0x281a <refresh_screen+0x270>
     2810:	88 81       	ld	r24, Y
@@ -5983,7 +5983,7 @@ void refresh_screen(void){
     2816:	0e 94 ec 0a 	call	0x15d8	; 0x15d8 <draw_tendself>
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 2)){
-    281a:	80 91 26 02 	lds	r24, 0x0226
+    281a:	80 91 25 02 	lds	r24, 0x0225
     281e:	81 30       	cpi	r24, 0x01	; 1
     2820:	29 f4       	brne	.+10     	; 0x282c <refresh_screen+0x282>
     2822:	88 81       	ld	r24, Y
@@ -5993,7 +5993,7 @@ void refresh_screen(void){
     2828:	0e 94 64 0b 	call	0x16c8	; 0x16c8 <draw_climbmarshill>
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 3)){
-    282c:	80 91 26 02 	lds	r24, 0x0226
+    282c:	80 91 25 02 	lds	r24, 0x0225
     2830:	81 30       	cpi	r24, 0x01	; 1
     2832:	29 f4       	brne	.+10     	; 0x283e <refresh_screen+0x294>
     2834:	88 81       	ld	r24, Y
@@ -6003,7 +6003,7 @@ void refresh_screen(void){
     283a:	0e 94 09 0c 	call	0x1812	; 0x1812 <draw_benefitnearest>
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 4)){
-    283e:	80 91 26 02 	lds	r24, 0x0226
+    283e:	80 91 25 02 	lds	r24, 0x0225
     2842:	81 30       	cpi	r24, 0x01	; 1
     2844:	29 f4       	brne	.+10     	; 0x2850 <refresh_screen+0x2a6>
     2846:	88 81       	ld	r24, Y
@@ -6013,7 +6013,7 @@ void refresh_screen(void){
     284c:	0e 94 14 0d 	call	0x1a28	; 0x1a28 <draw_fixsomething>
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 5)){
-    2850:	80 91 26 02 	lds	r24, 0x0226
+    2850:	80 91 25 02 	lds	r24, 0x0225
     2854:	81 30       	cpi	r24, 0x01	; 1
     2856:	31 f4       	brne	.+12     	; 0x2864 <refresh_screen+0x2ba>
     2858:	88 81       	ld	r24, Y
@@ -6024,7 +6024,7 @@ void refresh_screen(void){
     2860:	0e 94 f2 0d 	call	0x1be4	; 0x1be4 <draw_deg_n>
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 6)){
-    2864:	80 91 26 02 	lds	r24, 0x0226
+    2864:	80 91 25 02 	lds	r24, 0x0225
     2868:	81 30       	cpi	r24, 0x01	; 1
     286a:	31 f4       	brne	.+12     	; 0x2878 <refresh_screen+0x2ce>
     286c:	88 81       	ld	r24, Y
@@ -6035,7 +6035,7 @@ void refresh_screen(void){
     2874:	0e 94 56 10 	call	0x20ac	; 0x20ac <draw_getxxxx>
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 7)){
-    2878:	80 91 26 02 	lds	r24, 0x0226
+    2878:	80 91 25 02 	lds	r24, 0x0225
     287c:	81 30       	cpi	r24, 0x01	; 1
     287e:	29 f4       	brne	.+10     	; 0x288a <refresh_screen+0x2e0>
     2880:	88 81       	ld	r24, Y
@@ -6046,7 +6046,7 @@ void refresh_screen(void){
 			}
 			//previous order
 			if((displayvar == 2) && (previous_MEHC_order[0] == 0)){
-    288a:	80 91 26 02 	lds	r24, 0x0226
+    288a:	80 91 25 02 	lds	r24, 0x0225
     288e:	82 30       	cpi	r24, 0x02	; 2
     2890:	31 f4       	brne	.+12     	; 0x289e <refresh_screen+0x2f4>
     2892:	f7 01       	movw	r30, r14
@@ -6057,7 +6057,7 @@ void refresh_screen(void){
     289a:	0e 94 2b 0a 	call	0x1456	; 0x1456 <draw_stopandmeditate>
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 1)){
-    289e:	80 91 26 02 	lds	r24, 0x0226
+    289e:	80 91 25 02 	lds	r24, 0x0225
     28a2:	82 30       	cpi	r24, 0x02	; 2
     28a4:	31 f4       	brne	.+12     	; 0x28b2 <refresh_screen+0x308>
     28a6:	f7 01       	movw	r30, r14
@@ -6068,7 +6068,7 @@ void refresh_screen(void){
     28ae:	0e 94 ec 0a 	call	0x15d8	; 0x15d8 <draw_tendself>
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 2)){
-    28b2:	80 91 26 02 	lds	r24, 0x0226
+    28b2:	80 91 25 02 	lds	r24, 0x0225
     28b6:	82 30       	cpi	r24, 0x02	; 2
     28b8:	31 f4       	brne	.+12     	; 0x28c6 <refresh_screen+0x31c>
     28ba:	f7 01       	movw	r30, r14
@@ -6079,7 +6079,7 @@ void refresh_screen(void){
     28c2:	0e 94 64 0b 	call	0x16c8	; 0x16c8 <draw_climbmarshill>
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 3)){
-    28c6:	80 91 26 02 	lds	r24, 0x0226
+    28c6:	80 91 25 02 	lds	r24, 0x0225
     28ca:	82 30       	cpi	r24, 0x02	; 2
     28cc:	31 f4       	brne	.+12     	; 0x28da <refresh_screen+0x330>
     28ce:	f7 01       	movw	r30, r14
@@ -6090,7 +6090,7 @@ void refresh_screen(void){
     28d6:	0e 94 09 0c 	call	0x1812	; 0x1812 <draw_benefitnearest>
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 4)){
-    28da:	80 91 26 02 	lds	r24, 0x0226
+    28da:	80 91 25 02 	lds	r24, 0x0225
     28de:	82 30       	cpi	r24, 0x02	; 2
     28e0:	31 f4       	brne	.+12     	; 0x28ee <refresh_screen+0x344>
     28e2:	f7 01       	movw	r30, r14
@@ -6101,7 +6101,7 @@ void refresh_screen(void){
     28ea:	0e 94 14 0d 	call	0x1a28	; 0x1a28 <draw_fixsomething>
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 5)){
-    28ee:	80 91 26 02 	lds	r24, 0x0226
+    28ee:	80 91 25 02 	lds	r24, 0x0225
     28f2:	82 30       	cpi	r24, 0x02	; 2
     28f4:	39 f4       	brne	.+14     	; 0x2904 <refresh_screen+0x35a>
     28f6:	f7 01       	movw	r30, r14
@@ -6113,7 +6113,7 @@ void refresh_screen(void){
     2900:	0e 94 f2 0d 	call	0x1be4	; 0x1be4 <draw_deg_n>
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 6)){
-    2904:	80 91 26 02 	lds	r24, 0x0226
+    2904:	80 91 25 02 	lds	r24, 0x0225
     2908:	82 30       	cpi	r24, 0x02	; 2
     290a:	39 f4       	brne	.+14     	; 0x291a <refresh_screen+0x370>
     290c:	f7 01       	movw	r30, r14
@@ -6125,7 +6125,7 @@ void refresh_screen(void){
     2916:	0e 94 56 10 	call	0x20ac	; 0x20ac <draw_getxxxx>
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 7)){
-    291a:	80 91 26 02 	lds	r24, 0x0226
+    291a:	80 91 25 02 	lds	r24, 0x0225
     291e:	82 30       	cpi	r24, 0x02	; 2
     2920:	09 f0       	breq	.+2      	; 0x2924 <refresh_screen+0x37a>
     2922:	ff c0       	rjmp	.+510    	; 0x2b22 <refresh_screen+0x578>
@@ -6146,14 +6146,14 @@ void refresh_screen(void){
     2938:	ef c0       	rjmp	.+478    	; 0x2b18 <refresh_screen+0x56e>
 			
 			if((displayvar == 0) && (hours_until_next_MEHC_order > 0)){
-    293a:	80 91 26 02 	lds	r24, 0x0226
+    293a:	80 91 25 02 	lds	r24, 0x0225
     293e:	81 11       	cpse	r24, r1
     2940:	3c c0       	rjmp	.+120    	; 0x29ba <refresh_screen+0x410>
-    2942:	80 91 21 02 	lds	r24, 0x0221
+    2942:	80 91 20 02 	lds	r24, 0x0220
     2946:	88 23       	and	r24, r24
     2948:	c1 f1       	breq	.+112    	; 0x29ba <refresh_screen+0x410>
 				display_bottom_timeunit(hours);
-    294a:	80 91 03 02 	lds	r24, 0x0203
+    294a:	80 91 08 02 	lds	r24, 0x0208
     294e:	0e 94 df 07 	call	0xfbe	; 0xfbe <display_bottom_timeunit>
 				send_data(0x00);
     2952:	80 e0       	ldi	r24, 0x00	; 0
@@ -6192,7 +6192,7 @@ void refresh_screen(void){
     2994:	8f ef       	ldi	r24, 0xFF	; 255
     2996:	0e 94 66 00 	call	0xcc	; 0xcc <send_data>
 				display_bottom_timeunit(minutes);
-    299a:	80 91 04 02 	lds	r24, 0x0204
+    299a:	80 91 03 02 	lds	r24, 0x0203
     299e:	0e 94 df 07 	call	0xfbe	; 0xfbe <display_bottom_timeunit>
 				send_data(0x00);
     29a2:	80 e0       	ldi	r24, 0x00	; 0
@@ -6208,10 +6208,10 @@ void refresh_screen(void){
     29b6:	0e 94 66 00 	call	0xcc	; 0xcc <send_data>
 			}
 			if((displayvar == 0) && (hours_until_next_MEHC_order == 0)){
-    29ba:	80 91 26 02 	lds	r24, 0x0226
+    29ba:	80 91 25 02 	lds	r24, 0x0225
     29be:	81 11       	cpse	r24, r1
     29c0:	06 c0       	rjmp	.+12     	; 0x29ce <refresh_screen+0x424>
-    29c2:	80 91 21 02 	lds	r24, 0x0221
+    29c2:	80 91 20 02 	lds	r24, 0x0220
     29c6:	81 11       	cpse	r24, r1
     29c8:	02 c0       	rjmp	.+4      	; 0x29ce <refresh_screen+0x424>
 				draw_highcommand();
@@ -6219,60 +6219,60 @@ void refresh_screen(void){
 			}
 			//current order
 			if((displayvar == 1) && (current_MEHC_order[0] == 0)){
-    29ce:	80 91 26 02 	lds	r24, 0x0226
+    29ce:	80 91 25 02 	lds	r24, 0x0225
     29d2:	81 30       	cpi	r24, 0x01	; 1
     29d4:	31 f4       	brne	.+12     	; 0x29e2 <refresh_screen+0x438>
-    29d6:	80 91 17 02 	lds	r24, 0x0217
+    29d6:	80 91 16 02 	lds	r24, 0x0216
     29da:	81 11       	cpse	r24, r1
     29dc:	02 c0       	rjmp	.+4      	; 0x29e2 <refresh_screen+0x438>
 				draw_blankline();
     29de:	0e 94 22 0a 	call	0x1444	; 0x1444 <draw_blankline>
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 1)){
-    29e2:	80 91 26 02 	lds	r24, 0x0226
+    29e2:	80 91 25 02 	lds	r24, 0x0225
     29e6:	81 30       	cpi	r24, 0x01	; 1
     29e8:	31 f4       	brne	.+12     	; 0x29f6 <refresh_screen+0x44c>
-    29ea:	80 91 17 02 	lds	r24, 0x0217
+    29ea:	80 91 16 02 	lds	r24, 0x0216
     29ee:	81 30       	cpi	r24, 0x01	; 1
     29f0:	11 f4       	brne	.+4      	; 0x29f6 <refresh_screen+0x44c>
 				draw_blankline();
     29f2:	0e 94 22 0a 	call	0x1444	; 0x1444 <draw_blankline>
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 2)){
-    29f6:	80 91 26 02 	lds	r24, 0x0226
+    29f6:	80 91 25 02 	lds	r24, 0x0225
     29fa:	81 30       	cpi	r24, 0x01	; 1
     29fc:	31 f4       	brne	.+12     	; 0x2a0a <refresh_screen+0x460>
-    29fe:	80 91 17 02 	lds	r24, 0x0217
+    29fe:	80 91 16 02 	lds	r24, 0x0216
     2a02:	82 30       	cpi	r24, 0x02	; 2
     2a04:	11 f4       	brne	.+4      	; 0x2a0a <refresh_screen+0x460>
 				draw_blankline();
     2a06:	0e 94 22 0a 	call	0x1444	; 0x1444 <draw_blankline>
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 3)){
-    2a0a:	80 91 26 02 	lds	r24, 0x0226
+    2a0a:	80 91 25 02 	lds	r24, 0x0225
     2a0e:	81 30       	cpi	r24, 0x01	; 1
     2a10:	31 f4       	brne	.+12     	; 0x2a1e <refresh_screen+0x474>
-    2a12:	80 91 17 02 	lds	r24, 0x0217
+    2a12:	80 91 16 02 	lds	r24, 0x0216
     2a16:	83 30       	cpi	r24, 0x03	; 3
     2a18:	11 f4       	brne	.+4      	; 0x2a1e <refresh_screen+0x474>
 				draw_person();
     2a1a:	0e 94 c0 0c 	call	0x1980	; 0x1980 <draw_person>
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 4)){
-    2a1e:	80 91 26 02 	lds	r24, 0x0226
+    2a1e:	80 91 25 02 	lds	r24, 0x0225
     2a22:	81 30       	cpi	r24, 0x01	; 1
     2a24:	31 f4       	brne	.+12     	; 0x2a32 <refresh_screen+0x488>
-    2a26:	80 91 17 02 	lds	r24, 0x0217
+    2a26:	80 91 16 02 	lds	r24, 0x0216
     2a2a:	84 30       	cpi	r24, 0x04	; 4
     2a2c:	11 f4       	brne	.+4      	; 0x2a32 <refresh_screen+0x488>
 				draw_blankline();
     2a2e:	0e 94 22 0a 	call	0x1444	; 0x1444 <draw_blankline>
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 5)){
-    2a32:	80 91 26 02 	lds	r24, 0x0226
+    2a32:	80 91 25 02 	lds	r24, 0x0225
     2a36:	81 30       	cpi	r24, 0x01	; 1
     2a38:	39 f4       	brne	.+14     	; 0x2a48 <refresh_screen+0x49e>
-    2a3a:	80 91 17 02 	lds	r24, 0x0217
+    2a3a:	80 91 16 02 	lds	r24, 0x0216
     2a3e:	85 30       	cpi	r24, 0x05	; 5
     2a40:	19 f4       	brne	.+6      	; 0x2a48 <refresh_screen+0x49e>
 				draw_deg_e(1);
@@ -6280,20 +6280,20 @@ void refresh_screen(void){
     2a44:	0e 94 24 0f 	call	0x1e48	; 0x1e48 <draw_deg_e>
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 6)){
-    2a48:	80 91 26 02 	lds	r24, 0x0226
+    2a48:	80 91 25 02 	lds	r24, 0x0225
     2a4c:	81 30       	cpi	r24, 0x01	; 1
     2a4e:	31 f4       	brne	.+12     	; 0x2a5c <refresh_screen+0x4b2>
-    2a50:	80 91 17 02 	lds	r24, 0x0217
+    2a50:	80 91 16 02 	lds	r24, 0x0216
     2a54:	86 30       	cpi	r24, 0x06	; 6
     2a56:	11 f4       	brne	.+4      	; 0x2a5c <refresh_screen+0x4b2>
 				draw_blankline();
     2a58:	0e 94 22 0a 	call	0x1444	; 0x1444 <draw_blankline>
 			}
 			if((displayvar == 1) && (current_MEHC_order[0] == 7)){
-    2a5c:	80 91 26 02 	lds	r24, 0x0226
+    2a5c:	80 91 25 02 	lds	r24, 0x0225
     2a60:	81 30       	cpi	r24, 0x01	; 1
     2a62:	39 f4       	brne	.+14     	; 0x2a72 <refresh_screen+0x4c8>
-    2a64:	80 91 17 02 	lds	r24, 0x0217
+    2a64:	80 91 16 02 	lds	r24, 0x0216
     2a68:	87 30       	cpi	r24, 0x07	; 7
     2a6a:	19 f4       	brne	.+6      	; 0x2a72 <refresh_screen+0x4c8>
 				draw_toxx(1);
@@ -6302,60 +6302,60 @@ void refresh_screen(void){
 			}
 			//previous order
 			if((displayvar == 2) && (previous_MEHC_order[0] == 0)){
-    2a72:	80 91 26 02 	lds	r24, 0x0226
+    2a72:	80 91 25 02 	lds	r24, 0x0225
     2a76:	82 30       	cpi	r24, 0x02	; 2
     2a78:	31 f4       	brne	.+12     	; 0x2a86 <refresh_screen+0x4dc>
-    2a7a:	80 91 0d 02 	lds	r24, 0x020D
+    2a7a:	80 91 0c 02 	lds	r24, 0x020C
     2a7e:	81 11       	cpse	r24, r1
     2a80:	02 c0       	rjmp	.+4      	; 0x2a86 <refresh_screen+0x4dc>
 				draw_blankline();
     2a82:	0e 94 22 0a 	call	0x1444	; 0x1444 <draw_blankline>
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 1)){
-    2a86:	80 91 26 02 	lds	r24, 0x0226
+    2a86:	80 91 25 02 	lds	r24, 0x0225
     2a8a:	82 30       	cpi	r24, 0x02	; 2
     2a8c:	31 f4       	brne	.+12     	; 0x2a9a <refresh_screen+0x4f0>
-    2a8e:	80 91 0d 02 	lds	r24, 0x020D
+    2a8e:	80 91 0c 02 	lds	r24, 0x020C
     2a92:	81 30       	cpi	r24, 0x01	; 1
     2a94:	11 f4       	brne	.+4      	; 0x2a9a <refresh_screen+0x4f0>
 				draw_blankline();
     2a96:	0e 94 22 0a 	call	0x1444	; 0x1444 <draw_blankline>
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 2)){
-    2a9a:	80 91 26 02 	lds	r24, 0x0226
+    2a9a:	80 91 25 02 	lds	r24, 0x0225
     2a9e:	82 30       	cpi	r24, 0x02	; 2
     2aa0:	31 f4       	brne	.+12     	; 0x2aae <refresh_screen+0x504>
-    2aa2:	80 91 0d 02 	lds	r24, 0x020D
+    2aa2:	80 91 0c 02 	lds	r24, 0x020C
     2aa6:	82 30       	cpi	r24, 0x02	; 2
     2aa8:	11 f4       	brne	.+4      	; 0x2aae <refresh_screen+0x504>
 				draw_blankline();
     2aaa:	0e 94 22 0a 	call	0x1444	; 0x1444 <draw_blankline>
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 3)){
-    2aae:	80 91 26 02 	lds	r24, 0x0226
+    2aae:	80 91 25 02 	lds	r24, 0x0225
     2ab2:	82 30       	cpi	r24, 0x02	; 2
     2ab4:	31 f4       	brne	.+12     	; 0x2ac2 <refresh_screen+0x518>
-    2ab6:	80 91 0d 02 	lds	r24, 0x020D
+    2ab6:	80 91 0c 02 	lds	r24, 0x020C
     2aba:	83 30       	cpi	r24, 0x03	; 3
     2abc:	11 f4       	brne	.+4      	; 0x2ac2 <refresh_screen+0x518>
 				draw_person();
     2abe:	0e 94 c0 0c 	call	0x1980	; 0x1980 <draw_person>
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 4)){
-    2ac2:	80 91 26 02 	lds	r24, 0x0226
+    2ac2:	80 91 25 02 	lds	r24, 0x0225
     2ac6:	82 30       	cpi	r24, 0x02	; 2
     2ac8:	31 f4       	brne	.+12     	; 0x2ad6 <refresh_screen+0x52c>
-    2aca:	80 91 0d 02 	lds	r24, 0x020D
+    2aca:	80 91 0c 02 	lds	r24, 0x020C
     2ace:	84 30       	cpi	r24, 0x04	; 4
     2ad0:	11 f4       	brne	.+4      	; 0x2ad6 <refresh_screen+0x52c>
 				draw_blankline();
     2ad2:	0e 94 22 0a 	call	0x1444	; 0x1444 <draw_blankline>
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 5)){
-    2ad6:	80 91 26 02 	lds	r24, 0x0226
+    2ad6:	80 91 25 02 	lds	r24, 0x0225
     2ada:	82 30       	cpi	r24, 0x02	; 2
     2adc:	39 f4       	brne	.+14     	; 0x2aec <refresh_screen+0x542>
-    2ade:	80 91 0d 02 	lds	r24, 0x020D
+    2ade:	80 91 0c 02 	lds	r24, 0x020C
     2ae2:	85 30       	cpi	r24, 0x05	; 5
     2ae4:	19 f4       	brne	.+6      	; 0x2aec <refresh_screen+0x542>
 				draw_deg_e(2);
@@ -6363,20 +6363,20 @@ void refresh_screen(void){
     2ae8:	0e 94 24 0f 	call	0x1e48	; 0x1e48 <draw_deg_e>
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 6)){
-    2aec:	80 91 26 02 	lds	r24, 0x0226
+    2aec:	80 91 25 02 	lds	r24, 0x0225
     2af0:	82 30       	cpi	r24, 0x02	; 2
     2af2:	31 f4       	brne	.+12     	; 0x2b00 <refresh_screen+0x556>
-    2af4:	80 91 0d 02 	lds	r24, 0x020D
+    2af4:	80 91 0c 02 	lds	r24, 0x020C
     2af8:	86 30       	cpi	r24, 0x06	; 6
     2afa:	11 f4       	brne	.+4      	; 0x2b00 <refresh_screen+0x556>
 				draw_blankline();
     2afc:	0e 94 22 0a 	call	0x1444	; 0x1444 <draw_blankline>
 			}
 			if((displayvar == 2) && (previous_MEHC_order[0] == 7)){
-    2b00:	80 91 26 02 	lds	r24, 0x0226
+    2b00:	80 91 25 02 	lds	r24, 0x0225
     2b04:	82 30       	cpi	r24, 0x02	; 2
     2b06:	79 f4       	brne	.+30     	; 0x2b26 <refresh_screen+0x57c>
-    2b08:	80 91 0d 02 	lds	r24, 0x020D
+    2b08:	80 91 0c 02 	lds	r24, 0x020C
     2b0c:	87 30       	cpi	r24, 0x07	; 7
     2b0e:	59 f4       	brne	.+22     	; 0x2b26 <refresh_screen+0x57c>
 				draw_toxx(2);
@@ -6420,7 +6420,7 @@ ISR(PCINT2_vect) {
     2b3a:	11 24       	eor	r1, r1
 	
 	number_of_frames_displayed = 0;
-    2b3c:	10 92 0c 02 	sts	0x020C, r1
+    2b3c:	10 92 0b 02 	sts	0x020B, r1
 	//resetting this variable to zero causes the screen to be turned on for a bit while it's re-incremented
 }
     2b40:	0f 90       	pop	r0
@@ -6493,14 +6493,14 @@ ISR(TIMER2_OVF_vect){
 	if(((PIND & 0x02) == 0x02) && (hours_until_next_MEHC_order == 0)){ //whatever trigger condition for order entry mode goes here
     2b98:	49 9b       	sbis	0x09, 1	; 9
     2b9a:	09 c0       	rjmp	.+18     	; 0x2bae <__vector_9+0x38>
-    2b9c:	80 91 21 02 	lds	r24, 0x0221
+    2b9c:	80 91 20 02 	lds	r24, 0x0220
     2ba0:	81 11       	cpse	r24, r1
     2ba2:	05 c0       	rjmp	.+10     	; 0x2bae <__vector_9+0x38>
 		order_array_index = 0;
-    2ba4:	10 92 22 02 	sts	0x0222, r1
+    2ba4:	10 92 21 02 	sts	0x0221, r1
 		order_entry_mode_flag = 1;
     2ba8:	81 e0       	ldi	r24, 0x01	; 1
-    2baa:	80 93 25 02 	sts	0x0225, r24
+    2baa:	80 93 24 02 	sts	0x0224, r24
 		
 //		sleep_disable();
 	}
@@ -6508,34 +6508,34 @@ ISR(TIMER2_OVF_vect){
 	if(((PIND & 0x08) == 0x08) && (order_entry_mode_flag == 0)){
     2bae:	4b 9b       	sbis	0x09, 3	; 9
     2bb0:	0f c0       	rjmp	.+30     	; 0x2bd0 <__vector_9+0x5a>
-    2bb2:	80 91 25 02 	lds	r24, 0x0225
+    2bb2:	80 91 24 02 	lds	r24, 0x0224
     2bb6:	81 11       	cpse	r24, r1
     2bb8:	0b c0       	rjmp	.+22     	; 0x2bd0 <__vector_9+0x5a>
 		displayvar++;
-    2bba:	80 91 26 02 	lds	r24, 0x0226
+    2bba:	80 91 25 02 	lds	r24, 0x0225
     2bbe:	8f 5f       	subi	r24, 0xFF	; 255
-    2bc0:	80 93 26 02 	sts	0x0226, r24
+    2bc0:	80 93 25 02 	sts	0x0225, r24
 		if(displayvar >= 3){
-    2bc4:	80 91 26 02 	lds	r24, 0x0226
+    2bc4:	80 91 25 02 	lds	r24, 0x0225
     2bc8:	83 30       	cpi	r24, 0x03	; 3
     2bca:	10 f0       	brcs	.+4      	; 0x2bd0 <__vector_9+0x5a>
 			displayvar = 0;
-    2bcc:	10 92 26 02 	sts	0x0226, r1
+    2bcc:	10 92 25 02 	sts	0x0225, r1
 		}
 	}
 	
 	
 	if((rand_int_loaded == 1) && (order_entry_mode_flag == 1)){
-    2bd0:	80 91 23 02 	lds	r24, 0x0223
+    2bd0:	80 91 22 02 	lds	r24, 0x0222
     2bd4:	81 30       	cpi	r24, 0x01	; 1
     2bd6:	09 f0       	breq	.+2      	; 0x2bda <__vector_9+0x64>
     2bd8:	47 c0       	rjmp	.+142    	; 0x2c68 <__vector_9+0xf2>
-    2bda:	80 91 25 02 	lds	r24, 0x0225
+    2bda:	80 91 24 02 	lds	r24, 0x0224
     2bde:	81 30       	cpi	r24, 0x01	; 1
     2be0:	09 f0       	breq	.+2      	; 0x2be4 <__vector_9+0x6e>
     2be2:	42 c0       	rjmp	.+132    	; 0x2c68 <__vector_9+0xf2>
 		if(order_array_index == 0){
-    2be4:	80 91 22 02 	lds	r24, 0x0222
+    2be4:	80 91 21 02 	lds	r24, 0x0221
     2be8:	81 11       	cpse	r24, r1
     2bea:	1c c0       	rjmp	.+56     	; 0x2c24 <__vector_9+0xae>
     2bec:	80 e0       	ldi	r24, 0x00	; 0
@@ -6544,11 +6544,11 @@ ISR(TIMER2_OVF_vect){
 			for(r=0;r<10;r++){
 				previous_MEHC_order[r] = current_MEHC_order[r];
     2bf0:	fc 01       	movw	r30, r24
-    2bf2:	e9 5e       	subi	r30, 0xE9	; 233
+    2bf2:	ea 5e       	subi	r30, 0xEA	; 234
     2bf4:	fd 4f       	sbci	r31, 0xFD	; 253
     2bf6:	20 81       	ld	r18, Z
     2bf8:	fc 01       	movw	r30, r24
-    2bfa:	e3 5f       	subi	r30, 0xF3	; 243
+    2bfa:	e4 5f       	subi	r30, 0xF4	; 244
     2bfc:	fd 4f       	sbci	r31, 0xFD	; 253
     2bfe:	20 83       	st	Z, r18
     2c00:	01 96       	adiw	r24, 0x01	; 1
@@ -6564,62 +6564,62 @@ ISR(TIMER2_OVF_vect){
 				previous_MEHC_order[r] = current_MEHC_order[r];
 			}			
 		current_MEHC_order[order_array_index] = (rand_int_locked % 8);
-    2c08:	e0 91 22 02 	lds	r30, 0x0222
+    2c08:	e0 91 21 02 	lds	r30, 0x0221
     2c0c:	f0 e0       	ldi	r31, 0x00	; 0
-    2c0e:	80 91 24 02 	lds	r24, 0x0224
+    2c0e:	80 91 23 02 	lds	r24, 0x0223
     2c12:	87 70       	andi	r24, 0x07	; 7
-    2c14:	e9 5e       	subi	r30, 0xE9	; 233
+    2c14:	ea 5e       	subi	r30, 0xEA	; 234
     2c16:	fd 4f       	sbci	r31, 0xFD	; 253
     2c18:	80 83       	st	Z, r24
 		order_array_index++;
-    2c1a:	80 91 22 02 	lds	r24, 0x0222
+    2c1a:	80 91 21 02 	lds	r24, 0x0221
     2c1e:	8f 5f       	subi	r24, 0xFF	; 255
-    2c20:	80 93 22 02 	sts	0x0222, r24
+    2c20:	80 93 21 02 	sts	0x0221, r24
 		}
 		if(order_array_index > 0){
-    2c24:	80 91 22 02 	lds	r24, 0x0222
+    2c24:	80 91 21 02 	lds	r24, 0x0221
     2c28:	88 23       	and	r24, r24
     2c2a:	69 f0       	breq	.+26     	; 0x2c46 <__vector_9+0xd0>
 			current_MEHC_order[order_array_index] = rand_int_locked;
-    2c2c:	e0 91 22 02 	lds	r30, 0x0222
+    2c2c:	e0 91 21 02 	lds	r30, 0x0221
     2c30:	f0 e0       	ldi	r31, 0x00	; 0
-    2c32:	80 91 24 02 	lds	r24, 0x0224
-    2c36:	e9 5e       	subi	r30, 0xE9	; 233
+    2c32:	80 91 23 02 	lds	r24, 0x0223
+    2c36:	ea 5e       	subi	r30, 0xEA	; 234
     2c38:	fd 4f       	sbci	r31, 0xFD	; 253
     2c3a:	80 83       	st	Z, r24
 			order_array_index++;
-    2c3c:	80 91 22 02 	lds	r24, 0x0222
+    2c3c:	80 91 21 02 	lds	r24, 0x0221
     2c40:	8f 5f       	subi	r24, 0xFF	; 255
-    2c42:	80 93 22 02 	sts	0x0222, r24
+    2c42:	80 93 21 02 	sts	0x0221, r24
 		}
 		
 		///*uncommenting this will set the timer to actually delay the orders
 		if(order_array_index >= 7){
-    2c46:	80 91 22 02 	lds	r24, 0x0222
+    2c46:	80 91 21 02 	lds	r24, 0x0221
     2c4a:	87 30       	cpi	r24, 0x07	; 7
     2c4c:	28 f0       	brcs	.+10     	; 0x2c58 <__vector_9+0xe2>
 			hours_until_next_MEHC_order = (current_MEHC_order[6] % 128);			
-    2c4e:	80 91 1d 02 	lds	r24, 0x021D
+    2c4e:	80 91 1c 02 	lds	r24, 0x021C
     2c52:	8f 77       	andi	r24, 0x7F	; 127
-    2c54:	80 93 21 02 	sts	0x0221, r24
+    2c54:	80 93 20 02 	sts	0x0220, r24
 		}
 		//uncommenting the above snippet sets timer to actually delay orders*/
 		
 		if(order_array_index >= 8){ 
-    2c58:	80 91 22 02 	lds	r24, 0x0222
+    2c58:	80 91 21 02 	lds	r24, 0x0221
     2c5c:	88 30       	cpi	r24, 0x08	; 8
     2c5e:	10 f0       	brcs	.+4      	; 0x2c64 <__vector_9+0xee>
 			//this was a 5 before, but it caused me to write outside of the array and mess up the variable hours_until_next_MEHC_order...
 			//so I've kludgily extended the array size to work around the effect
 			order_entry_mode_flag = 0;
-    2c60:	10 92 25 02 	sts	0x0225, r1
+    2c60:	10 92 24 02 	sts	0x0224, r1
 		}
 		rand_int_loaded = 0;
-    2c64:	10 92 23 02 	sts	0x0223, r1
+    2c64:	10 92 22 02 	sts	0x0222, r1
 	}
 	
 	if(number_of_frames_displayed == 0){
-    2c68:	80 91 0c 02 	lds	r24, 0x020C
+    2c68:	80 91 0b 02 	lds	r24, 0x020B
     2c6c:	81 11       	cpse	r24, r1
     2c6e:	03 c0       	rjmp	.+6      	; 0x2c76 <__vector_9+0x100>
 		send_command(0xAF); //turn the display on
@@ -6627,21 +6627,21 @@ ISR(TIMER2_OVF_vect){
     2c72:	0e 94 61 00 	call	0xc2	; 0xc2 <send_command>
 	}	
 	if(number_of_frames_displayed < frames_until_turnoff){
-    2c76:	80 91 0c 02 	lds	r24, 0x020C
+    2c76:	80 91 0b 02 	lds	r24, 0x020B
     2c7a:	83 32       	cpi	r24, 0x23	; 35
     2c7c:	40 f4       	brcc	.+16     	; 0x2c8e <__vector_9+0x118>
 		refresh_screen();
     2c7e:	0e 94 d5 12 	call	0x25aa	; 0x25aa <refresh_screen>
 		number_of_frames_displayed++;
-    2c82:	80 91 0c 02 	lds	r24, 0x020C
+    2c82:	80 91 0b 02 	lds	r24, 0x020B
     2c86:	8f 5f       	subi	r24, 0xFF	; 255
-    2c88:	80 93 0c 02 	sts	0x020C, r24
+    2c88:	80 93 0b 02 	sts	0x020B, r24
     2c8c:	0b c0       	rjmp	.+22     	; 0x2ca4 <__vector_9+0x12e>
 	}else if((number_of_frames_displayed >= frames_until_turnoff) && (order_entry_mode_flag == 0)){
-    2c8e:	80 91 0c 02 	lds	r24, 0x020C
+    2c8e:	80 91 0b 02 	lds	r24, 0x020B
     2c92:	83 32       	cpi	r24, 0x23	; 35
     2c94:	38 f0       	brcs	.+14     	; 0x2ca4 <__vector_9+0x12e>
-    2c96:	80 91 25 02 	lds	r24, 0x0225
+    2c96:	80 91 24 02 	lds	r24, 0x0224
     2c9a:	81 11       	cpse	r24, r1
     2c9c:	03 c0       	rjmp	.+6      	; 0x2ca4 <__vector_9+0x12e>
 		send_command(0xAE); //display off command
@@ -6650,109 +6650,109 @@ ISR(TIMER2_OVF_vect){
 	}
 	
 	IJ--;
-    2ca4:	80 91 27 02 	lds	r24, 0x0227
+    2ca4:	80 91 26 02 	lds	r24, 0x0226
     2ca8:	81 50       	subi	r24, 0x01	; 1
-    2caa:	80 93 27 02 	sts	0x0227, r24
+    2caa:	80 93 26 02 	sts	0x0226, r24
 	if(IJ == 255){
-    2cae:	80 91 27 02 	lds	r24, 0x0227
+    2cae:	80 91 26 02 	lds	r24, 0x0226
     2cb2:	8f 3f       	cpi	r24, 0xFF	; 255
     2cb4:	61 f5       	brne	.+88     	; 0x2d0e <__vector_9+0x198>
 		IJ = 99;
     2cb6:	83 e6       	ldi	r24, 0x63	; 99
-    2cb8:	80 93 27 02 	sts	0x0227, r24
+    2cb8:	80 93 26 02 	sts	0x0226, r24
 		GH--;
-    2cbc:	80 91 05 02 	lds	r24, 0x0205
+    2cbc:	80 91 04 02 	lds	r24, 0x0204
     2cc0:	81 50       	subi	r24, 0x01	; 1
-    2cc2:	80 93 05 02 	sts	0x0205, r24
+    2cc2:	80 93 04 02 	sts	0x0204, r24
 		if(GH == 255){
-    2cc6:	80 91 05 02 	lds	r24, 0x0205
+    2cc6:	80 91 04 02 	lds	r24, 0x0204
     2cca:	8f 3f       	cpi	r24, 0xFF	; 255
     2ccc:	01 f5       	brne	.+64     	; 0x2d0e <__vector_9+0x198>
 			GH = 99;
     2cce:	83 e6       	ldi	r24, 0x63	; 99
-    2cd0:	80 93 05 02 	sts	0x0205, r24
+    2cd0:	80 93 04 02 	sts	0x0204, r24
 			EF--;
-    2cd4:	80 91 06 02 	lds	r24, 0x0206
+    2cd4:	80 91 05 02 	lds	r24, 0x0205
     2cd8:	81 50       	subi	r24, 0x01	; 1
-    2cda:	80 93 06 02 	sts	0x0206, r24
+    2cda:	80 93 05 02 	sts	0x0205, r24
 			if(EF == 255){
-    2cde:	80 91 06 02 	lds	r24, 0x0206
+    2cde:	80 91 05 02 	lds	r24, 0x0205
     2ce2:	8f 3f       	cpi	r24, 0xFF	; 255
     2ce4:	a1 f4       	brne	.+40     	; 0x2d0e <__vector_9+0x198>
 				EF = 99;
     2ce6:	83 e6       	ldi	r24, 0x63	; 99
-    2ce8:	80 93 06 02 	sts	0x0206, r24
+    2ce8:	80 93 05 02 	sts	0x0205, r24
 				CD--;
-    2cec:	80 91 07 02 	lds	r24, 0x0207
+    2cec:	80 91 06 02 	lds	r24, 0x0206
     2cf0:	81 50       	subi	r24, 0x01	; 1
-    2cf2:	80 93 07 02 	sts	0x0207, r24
+    2cf2:	80 93 06 02 	sts	0x0206, r24
 				if(CD == 255){
-    2cf6:	80 91 07 02 	lds	r24, 0x0207
+    2cf6:	80 91 06 02 	lds	r24, 0x0206
     2cfa:	8f 3f       	cpi	r24, 0xFF	; 255
     2cfc:	41 f4       	brne	.+16     	; 0x2d0e <__vector_9+0x198>
 					CD = 99;
     2cfe:	83 e6       	ldi	r24, 0x63	; 99
-    2d00:	80 93 07 02 	sts	0x0207, r24
+    2d00:	80 93 06 02 	sts	0x0206, r24
 					AB--; //I should be dead by the time this function breaks
-    2d04:	80 91 08 02 	lds	r24, 0x0208
+    2d04:	80 91 07 02 	lds	r24, 0x0207
     2d08:	81 50       	subi	r24, 0x01	; 1
-    2d0a:	80 93 08 02 	sts	0x0208, r24
+    2d0a:	80 93 07 02 	sts	0x0207, r24
 			}
 		}
 	}
 	
 	
 	num_overflows++; //overflows happen every quarter second
-    2d0e:	80 91 0b 02 	lds	r24, 0x020B
+    2d0e:	80 91 0a 02 	lds	r24, 0x020A
     2d12:	8f 5f       	subi	r24, 0xFF	; 255
-    2d14:	80 93 0b 02 	sts	0x020B, r24
+    2d14:	80 93 0a 02 	sts	0x020A, r24
 	if(num_overflows % 4 == 0){
-    2d18:	80 91 0b 02 	lds	r24, 0x020B
+    2d18:	80 91 0a 02 	lds	r24, 0x020A
     2d1c:	83 70       	andi	r24, 0x03	; 3
     2d1e:	09 f0       	breq	.+2      	; 0x2d22 <__vector_9+0x1ac>
     2d20:	76 c0       	rjmp	.+236    	; 0x2e0e <__vector_9+0x298>
 		seconds++;
-    2d22:	80 91 0a 02 	lds	r24, 0x020A
+    2d22:	80 91 09 02 	lds	r24, 0x0209
     2d26:	8f 5f       	subi	r24, 0xFF	; 255
-    2d28:	80 93 0a 02 	sts	0x020A, r24
+    2d28:	80 93 09 02 	sts	0x0209, r24
 		if(seconds == 60){
-    2d2c:	80 91 0a 02 	lds	r24, 0x020A
+    2d2c:	80 91 09 02 	lds	r24, 0x0209
     2d30:	8c 33       	cpi	r24, 0x3C	; 60
     2d32:	09 f0       	breq	.+2      	; 0x2d36 <__vector_9+0x1c0>
     2d34:	6c c0       	rjmp	.+216    	; 0x2e0e <__vector_9+0x298>
 			seconds = 0;
-    2d36:	10 92 0a 02 	sts	0x020A, r1
+    2d36:	10 92 09 02 	sts	0x0209, r1
 			minutes++;
-    2d3a:	80 91 04 02 	lds	r24, 0x0204
+    2d3a:	80 91 03 02 	lds	r24, 0x0203
     2d3e:	8f 5f       	subi	r24, 0xFF	; 255
-    2d40:	80 93 04 02 	sts	0x0204, r24
+    2d40:	80 93 03 02 	sts	0x0203, r24
 			if(minutes == 60){
-    2d44:	80 91 04 02 	lds	r24, 0x0204
+    2d44:	80 91 03 02 	lds	r24, 0x0203
     2d48:	8c 33       	cpi	r24, 0x3C	; 60
     2d4a:	09 f0       	breq	.+2      	; 0x2d4e <__vector_9+0x1d8>
     2d4c:	60 c0       	rjmp	.+192    	; 0x2e0e <__vector_9+0x298>
 				minutes = 0;
-    2d4e:	10 92 04 02 	sts	0x0204, r1
+    2d4e:	10 92 03 02 	sts	0x0203, r1
 				hours++;
-    2d52:	80 91 03 02 	lds	r24, 0x0203
+    2d52:	80 91 08 02 	lds	r24, 0x0208
     2d56:	8f 5f       	subi	r24, 0xFF	; 255
-    2d58:	80 93 03 02 	sts	0x0203, r24
+    2d58:	80 93 08 02 	sts	0x0208, r24
 				if(hours_until_next_MEHC_order != 0){
-    2d5c:	80 91 21 02 	lds	r24, 0x0221
+    2d5c:	80 91 20 02 	lds	r24, 0x0220
     2d60:	88 23       	and	r24, r24
     2d62:	29 f0       	breq	.+10     	; 0x2d6e <__vector_9+0x1f8>
 					hours_until_next_MEHC_order--;
-    2d64:	80 91 21 02 	lds	r24, 0x0221
+    2d64:	80 91 20 02 	lds	r24, 0x0220
     2d68:	81 50       	subi	r24, 0x01	; 1
-    2d6a:	80 93 21 02 	sts	0x0221, r24
+    2d6a:	80 93 20 02 	sts	0x0220, r24
 				}				
 				if(hours == 24){
-    2d6e:	80 91 03 02 	lds	r24, 0x0203
+    2d6e:	80 91 08 02 	lds	r24, 0x0208
     2d72:	88 31       	cpi	r24, 0x18	; 24
     2d74:	09 f0       	breq	.+2      	; 0x2d78 <__vector_9+0x202>
     2d76:	4b c0       	rjmp	.+150    	; 0x2e0e <__vector_9+0x298>
 					hours = 0;
-    2d78:	10 92 03 02 	sts	0x0203, r1
+    2d78:	10 92 08 02 	sts	0x0208, r1
 					days++;
     2d7c:	80 91 02 02 	lds	r24, 0x0202
     2d80:	8f 5f       	subi	r24, 0xFF	; 255
@@ -7012,14 +7012,14 @@ int main(void){
 				if(((PIND & 0x08) == 0x08) && (rand_int_loaded == 0)){
     2ec2:	4b 9b       	sbis	0x09, 3	; 9
     2ec4:	0b c0       	rjmp	.+22     	; 0x2edc <main+0xac>
-    2ec6:	80 91 23 02 	lds	r24, 0x0223
+    2ec6:	80 91 22 02 	lds	r24, 0x0222
     2eca:	81 11       	cpse	r24, r1
     2ecc:	07 c0       	rjmp	.+14     	; 0x2edc <main+0xac>
 					rand_int_locked = rand_int;
-    2ece:	90 93 24 02 	sts	0x0224, r25
+    2ece:	90 93 23 02 	sts	0x0223, r25
 					rand_int = 0;
 					rand_int_loaded = 1;
-    2ed2:	30 93 23 02 	sts	0x0223, r19
+    2ed2:	30 93 22 02 	sts	0x0222, r19
 			
 			while(order_entry_mode_flag == 1){
 				rand_int++;
@@ -7037,7 +7037,7 @@ int main(void){
     2eda:	92 2f       	mov	r25, r18
 			
 			while(order_entry_mode_flag == 1){
-    2edc:	80 91 25 02 	lds	r24, 0x0225
+    2edc:	80 91 24 02 	lds	r24, 0x0224
     2ee0:	81 30       	cpi	r24, 0x01	; 1
     2ee2:	71 f3       	breq	.-36     	; 0x2ec0 <main+0x90>
 					rand_int_loaded = 1;
@@ -7046,7 +7046,7 @@ int main(void){
 
 
 			if(order_entry_mode_flag == 0){
-    2ee4:	80 91 25 02 	lds	r24, 0x0225
+    2ee4:	80 91 24 02 	lds	r24, 0x0224
     2ee8:	81 11       	cpse	r24, r1
     2eea:	f7 cf       	rjmp	.-18     	; 0x2eda <main+0xaa>
 				sleep_mode();
